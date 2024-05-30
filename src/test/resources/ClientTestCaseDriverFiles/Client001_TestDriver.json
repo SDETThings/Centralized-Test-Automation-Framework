@@ -1,0 +1,16 @@
+{
+  "TestCaseRunConfiguration": [
+    {
+      "testCaseId": "TC0003",
+      "Client": "CL002",
+      "Environment": "ENV001",
+      "BrowserName": "",
+      "BrowserVersion": "",
+      "OSName": "",
+      "OSVersion": "",
+      "DeviceName": "",
+      "AppVersion": "",
+      "groupName": ""
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "TEST_CASES": [
+    {
+      "TEST_CASE_ID": "TC0001",
+      "TYPE": [
+        {
+          "COMPONENT": "API",
+          "ITERATION": [
+            {
+              "ITERATION_NUMBER": 1,
+              "ITERATION_DETAILS": [
+                {
+                  "ENDPOINT_DETAILS": [
+                    {
+                      "ENDPOINTS": [
+                        {
+                          "ENDPOINT_NAME": "getBearerToken",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "username" : "admin",
+                                "password" : "password123"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "token": "not null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "placePetOrder",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "petId": 5,
+                                "quantity": 2,
+                                "shipDate": "",
+                                "status": "Requested"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "not null",
+                                "petId": 5,
+                                "quantity": 2,
+                                "status": "Requested",
+                                "complete": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "getPetOrder",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS":
+                              {
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": 5,
+                                "petId": 6,
+                                "quantity": 7,
+                                "shipDate": "2021-09-29T05:15:43.101+0000",
+                                "status": "placed",
+                                "complete": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TEST_CASE_ID": "TC0002",
+      "TYPE": [
+        {
+          "COMPONENT": "API",
+          "ITERATION": [
+            {
+              "ITERATION_NUMBER": 1,
+              "ITERATION_DETAILS": [
+                {
+                  "ENDPOINT_DETAILS": [
+                    {
+                      "ENDPOINTS": [
+                        {
+                          "ENDPOINT_NAME": "getBearerToken",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "username" : "admin",
+                                "password" : "password123"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "token": "not null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "placePetOrder",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "petId": 5,
+                                "quantity": 2,
+                                "shipDate": "",
+                                "status": "Requested"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "not null",
+                                "petId": 5,
+                                "quantity": 2,
+                                "status": "Requested",
+                                "complete": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "getPetOrder",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS":
+                              {
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": 5,
+                                "petId": 6,
+                                "quantity": 7,
+                                "shipDate": "2021-09-29T05:15:43.101+0000",
+                                "status": "placed",
+                                "complete": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "ITERATION_NUMBER": 2,
+              "ITERATION_DETAILS": [
+                {
+                  "ENDPOINT_DETAILS": [
+                    {
+                      "ENDPOINTS": [
+                        {
+                          "ENDPOINT_NAME": "getBearerToken",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "username" : "admin",
+                                "password" : "password123"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "token": "not null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "placePetOrder",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "petId": 5,
+                                "quantity": 2,
+                                "shipDate": "",
+                                "status": "Requested"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "not null",
+                                "petId": 5,
+                                "quantity": 2,
+                                "status": "Requested",
+                                "complete": true
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "getPetOrder",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS":
+                              {
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": 5,
+                                "petId": 6,
+                                "quantity": 7,
+                                "shipDate": "2021-09-29T05:15:43.101+0000",
+                                "status": "placed",
+                                "complete": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

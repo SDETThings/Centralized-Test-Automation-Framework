@@ -1,0 +1,18 @@
+{
+  "id": "{{static}}",
+  "category": {
+    "id": "{{static}}",
+    "name": "{{static}}"
+  },
+  "name": "{{static}}",
+  "photoUrls": [
+    "{{static}}"
+  ],
+  "tags": [
+    {
+      "id": "{{static}}",
+      "name": "{{static}}"
+    }
+  ],
+  "status": "{{static}}"
+}

@@ -1,0 +1,163 @@
+{
+  "TEST_CASES": [
+    {
+      "TEST_CASE_ID": "TC0001",
+      "TYPE": [
+        {
+          "COMPONENT": "API",
+          "ITERATION": [
+            {
+              "ITERATION_NUMBER": 1,
+              "ITERATION_DETAILS": [
+                {
+                  "ENDPOINT_DETAILS": [
+                    {
+                      "ENDPOINTS": [
+                        {
+                          "ENDPOINT_NAME": "getBearerToken",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "username" : "admin",
+                                "password" : "password123"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "token": "not null"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TEST_CASE_ID": "TC0002",
+      "TYPE": [
+        {
+          "COMPONENT": "API",
+          "ITERATION": [
+            {
+              "ITERATION_NUMBER": 1,
+              "ITERATION_DETAILS": [
+                {
+                  "ENDPOINT_DETAILS": [
+                    {
+                      "ENDPOINTS": [
+                        {
+                          "ENDPOINT_NAME": "CreateApplication",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "ProductId": "nd://cc/pid?sc=9700B15AALWRDDM00100"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "not null",
+                                "customerRef": "not null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "UpdateApplication",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "Title": "Mr"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "id",
+                                "customerRef": "customerRef"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "checkEligibility",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "state": "quoteAccept",
+                                "customerRef": "customerRef",
+                                "creditLimit": "not null",
+                                "apr": 23.9
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "ITERATION_NUMBER": 2,
+              "ITERATION_DETAILS": [
+                {
+                  "ENDPOINT_DETAILS": [
+                    {
+                      "ENDPOINTS": [
+                        {
+                          "ENDPOINT_NAME": "CreateApplication",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "ProductId": "nd://cc/pid?sc=9700B15AALWRDDM00100"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "not null",
+                                "customerRef": "not null"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "UpdateApplication",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                                "Title": "Mr"
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "id": "id",
+                                "customerRef": "customerRef"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "ENDPOINT_NAME": "checkEligibility",
+                          "TEST_DATA": [
+                            {
+                              "DYNAMIC_REQUEST_PAYLOAD_FIELDS": {
+                              },
+                              "EXPECTED_RESPONSE_PAYLOAD": {
+                                "state": "quoteAccept",
+                                "customerRef": "customerRef",
+                                "creditLimit": "not null",
+                                "apr": 23.9
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

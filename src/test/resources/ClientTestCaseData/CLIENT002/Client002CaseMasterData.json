@@ -1,0 +1,52 @@
+{
+  "TEST_CASES": [
+    {
+      "TEST_CASE_ID": "TC0003",
+      "TYPE":
+      [
+        {
+          "COMPONENT": "WEB",
+          "ITERATION":
+          [
+            {
+              "ITERATION_NUMBER": 1,
+              "ITERATION_DETAILS": [
+                {
+                  "WEB_PAGES":
+                  [
+                    {
+                      "WEB_PAGE":
+                      [
+                        {
+                          "TEST_DATA":
+                          [
+                            {
+                            "PAGE_NAME" : "LandingPage",
+                            "DATA":
+                              {
+                              }
+                            },
+                            {
+                              "PAGE_NAME" : "addUserPage",
+                              "DATA":
+                              {
+                                "firstName": "Kunal",
+                                "lastName": "Biswas",
+                                "email": "@gmail.com",
+                                "password": "Sunset123"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
