@@ -13,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class addUserPage extends BaseClass {
-    static String addUserPageConstant = PageConstants.addUserPage;
     private static final Logger log = LogManager.getLogger(landingPage.class);
     MasterDataUtils masterDataUtils ;
     DriverActions driverActions;
@@ -33,10 +32,10 @@ public class addUserPage extends BaseClass {
     {
         PageFactory.initElements(getDriver(), this);
     }
-    public contactListPage enterUserDetailsInSignUp(JsonArray completeTestCaseData) {
+  /*  public contactListPage enterUserDetailsInSignUp(JsonArray completeTestCaseData) {
         boolean isSuccesfull;
         masterDataUtils = new MasterDataUtils();
-        JsonObject pageData = masterDataUtils.accessPageWiseWenMobileData(completeTestCaseData, addUserPageConstant);
+        //JsonObject pageData = masterDataUtils.accessPageWiseWenMobileData(completeTestCaseData, addUserPageConstant);
         boolean hasClicked = false;
         driverActions = new DriverActions();
         try {
@@ -62,6 +61,6 @@ public class addUserPage extends BaseClass {
             throw new RuntimeException(e);
         }
         return new contactListPage();
-    }
+    }*/
 
 }

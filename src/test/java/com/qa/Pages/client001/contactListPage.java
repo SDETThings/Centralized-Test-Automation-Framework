@@ -10,8 +10,7 @@ public class contactListPage extends BaseClass {
     @FindBy(xpath = "//button[@id='add-contact']")
     WebElement addNewContactButton;
 
-    public String getTitleContactListPage()
-    {
+    public String getTitleContactListPage() throws InterruptedException {
         driverActions = new DriverActions();
 
        return driverActions.getTitle(getDriver());

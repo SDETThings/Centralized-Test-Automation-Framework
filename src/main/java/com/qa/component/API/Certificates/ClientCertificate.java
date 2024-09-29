@@ -52,8 +52,7 @@ import java.security.cert.CertificateException;
         public synchronized String LoadStringFromKeyVault(String keyVaultUri,String passwordKey) {
             SecretClient secretClient = new SecretClientBuilder().vaultUrl(keyVaultUri).credential(new DefaultAzureCredentialBuilder().build()).buildClient();
             KeyVaultSecret secretBundle1 = secretClient.getSecret(passwordKey);
-            String passwordValue = secretBundle1.getValue();
-            return passwordValue;
+            return secretBundle1.getValue();
         }
 
 }

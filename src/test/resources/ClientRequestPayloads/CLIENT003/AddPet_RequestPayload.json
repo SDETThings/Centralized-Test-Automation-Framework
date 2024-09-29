@@ -1,0 +1,18 @@
+{
+  "id": "",
+  "category": {
+    "id": "",
+    "name": "{{static}}"
+  },
+  "name": "{{static}}",
+  "photoUrls": [
+    "abc@something.com"
+  ],
+  "tags": [
+    {
+      "id": "",
+      "name": "{{static}}"
+    }
+  ],
+  "status": "{{static}}"
+}

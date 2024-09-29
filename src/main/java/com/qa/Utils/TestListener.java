@@ -17,62 +17,8 @@ import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-public class TestListener extends BaseClass implements Filter , IAnnotationTransformer {
-    private static final Logger log = LogManager.getLogger(TestListener.class);
-    @Override
-    public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext filterContext) {
-        Response response = filterContext.next(requestSpec, responseSpec);
-        if (requestSpec.getMethod().equalsIgnoreCase("POST") && requestSpec.getBody() !=
-                null && !(response.getBody().asString().length()>1024)) {
-            log.info("\n\n Method => " + requestSpec.getMethod() +
-                    "\n URI => " + requestSpec.getURI() +
-                    "\n Request Headers => " + requestSpec.getHeaders() +
-                    "\n Request Body => " + requestSpec.getBody().toString() +
-                    "\n Response Body => " + response.getBody().prettyPrint());
-        }else if (requestSpec.getMethod().equalsIgnoreCase("POST") &&
-                requestSpec.getBody() == null && !(response.getBody().asString().length()>1024)) {
-            log.info("\n\n Method => " + requestSpec.getMethod() +
-                    "\n URI => " + requestSpec.getURI() +
-                    "\n Request Headers => " + requestSpec.getHeaders() +
-                    "\n Response Body => " + response.getBody().prettyPrint());
-        }else if (requestSpec.getMethod().equalsIgnoreCase("GET") && !
-                (response.getBody().asString().length()>1024)) {
-            log.info("\n\n Method => " + requestSpec.getMethod() +
-                    "\n URI => " + requestSpec.getURI() +
-                    "\n Request Headers => " + requestSpec.getHeaders() +
-                    "\n Response Body => " + response.getBody().prettyPrint());
-        }else if (requestSpec.getMethod().equalsIgnoreCase("GET") &&
-                response.getBody().asString().length()>1024) {
-            log.info("\n\n Method => " + requestSpec.getMethod() +
-                    "\n URI => " + requestSpec.getURI() +
-                    "\n Request Headers => " + requestSpec.getHeaders()+
-                    "\n Response Body => " + "{ \n Response is too large to print in console \n}");
-        }else if (requestSpec.getMethod().equalsIgnoreCase("GET") &&
-                (response.getContentType().contains("text/html") ||
-                        response.getContentType().contains("application/pdf"))) {
-            log.info("\n\n Method => " + requestSpec.getMethod() +
-                            "\n URI => " + requestSpec.getURI() +
-                            "\n Request Headers => " + requestSpec.getHeaders() +
-                            "\n Response Body => " + "{ \n Response is a large html or pdf file too large for console \n}");
-    }else if (requestSpec.getMethod().equalsIgnoreCase("PUT") && !
-            (response.getBody().asString().length()>1024)) {
-        log.info("\n\n Method => " + requestSpec.getMethod() +
-                "\n URI => " + requestSpec.getURI() +
-                "\n Request Headers => " + requestSpec.getHeaders() +
-                "\n Request Body => " + requestSpec.getBody().toString() +
-                "\n Response Body => " + response.getBody().prettyPrint());
-    }else if (requestSpec.getMethod().equalsIgnoreCase("PATCH") && !
-            (response.getBody().asString().length()>1024)) {
-        log.info("\n\n Method => " + requestSpec.getMethod() +
-                "\n URI => " + requestSpec.getURI() +
-                "\n Request Headers => " + requestSpec.getHeaders() +
-                "\n Request Body => " + requestSpec.getBody().toString() +
-                "\n Response Body => " + response.getBody().prettyPrint());
-    }
-log.info("************************************************************************");
-log.info("************************************************************************");
-return response;
-}
+public class TestListener extends BaseClass implements IAnnotationTransformer {
+
     public synchronized void mergeTestDriverFile() throws IOException {
         setProperties();
         Gson gson = new Gson();
@@ -171,7 +117,7 @@ return response;
             if(shouldBeSkipped(iTestAnnotation,method))
             {
                 iTestAnnotation.setEnabled(true);
-                iTestAnnotation.setRetryAnalyzer(RetryAnalyzer.class);
+                //iTestAnnotation.setRetryAnalyzer(RetryAnalyzer.class);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,7 +1,7 @@
 {
   "TEST_CASES": [
     {
-      "TEST_CASE_ID": "TC0003",
+      "TEST_CASE_ID": "CON0001",
       "TYPE":
       [
         {
@@ -10,6 +10,8 @@
           [
             {
               "ITERATION_NUMBER": 1,
+              "ACTIVE": "Y",
+              "DESCRIPTION": "Login to Create contact website and create a contact",
               "ITERATION_DETAILS": [
                 {
                   "WEB_PAGES":
@@ -24,16 +26,68 @@
                             "PAGE_NAME" : "LandingPage",
                             "DATA":
                               {
+                                "email": "jsmith.u1@gamil.com",
+                                "password": "Kunalb@123"
                               }
                             },
                             {
-                              "PAGE_NAME" : "addUserPage",
+                              "PAGE_NAME" : "contactListPage",
                               "DATA":
                               {
                                 "firstName": "Kunal",
                                 "lastName": "Biswas",
-                                "email": "@gmail.com",
+                                "email": "something@gmail.com",
                                 "password": "Sunset123"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TEST_CASE_ID": "CON0002",
+      "TYPE":
+      [
+        {
+          "COMPONENT": "WEB",
+          "ITERATION":
+          [
+            {
+              "ITERATION_NUMBER": 1,
+              "ACTIVE": "Y",
+              "DESCRIPTION": "Login to Create contact website and create a contact",
+              "ITERATION_DETAILS": [
+                {
+                  "WEB_PAGES":
+                  [
+                    {
+                      "WEB_PAGE":
+                      [
+                        {
+                          "TEST_DATA":
+                          [
+                            {
+                              "PAGE_NAME" : "LandingPage",
+                              "DATA":
+                              {
+                                "email": "jsmitu1@gamil.com",
+                                "password": "Kunalb@123"
+                              }
+                            },
+                            {
+                              "PAGE_NAME" : "contactListPage",
+                              "DATA":
+                              {
+                                "firstName": "Kunal2",
+                                "lastName": "Biswas2"
                               }
                             }
                           ]

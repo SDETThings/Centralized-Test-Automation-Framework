@@ -22,7 +22,6 @@ public class Constants extends BaseClass {
         3. Pick out the request payload fields to modify and expected fields to validate from Master test case data
         4. In some cases pick out the Base urls ( depending on application requirement )
      */
-    public static final String GET_RESTFULL_BOOKER_AUTH_TOKEN = "getBearerToken";
-    public static final String PETSTORE_PLACE_ORDER = "placePetOrder";
-    public static final String PETSTORE_GET_ORDER = "getPetOrder";
+    public static final String ADD_NEW_PET = "AddPet";
+    public static final String FIND_PET = "FindPet";
 }

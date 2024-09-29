@@ -2,6 +2,7 @@ package com.qa.component.WEB.DriverActionables;
 
 import com.qa.Base.BaseClass;
 import com.qa.Utils.ReportListeners;
+import com.qa.component.WEB.webWaits.WebDriverWaits;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class DriverActions extends BaseClass {
+    WebDriverWaits waits;
     private static final Logger log = LogManager.getLogger(DriverActions.class);
 
     public boolean clickOnWebElement(WebDriver driver, WebElement ele) throws Exception {
@@ -55,18 +57,36 @@ public class DriverActions extends BaseClass {
         }
         return flag;
     }
-    public String getTitle(WebDriver driver) {
+    public boolean enterText(WebDriver driver, WebElement ele,String text) throws Exception {
         boolean flag = false;
-        String text = driver.getTitle();
-        if (text.length()>0) {
-            flag = true;
+        try
+        {
+            if(ele.isDisplayed())
+            {
+                ele.sendKeys(text);
+                flag = true;
+            }else {
+                log.error("Cannot find given web element : " + ele);
+            }
+        }catch (Exception e)
+        {
+            log.error("Cannot enter text : " + text + " in text box : " + ele);
+            throw new Exception();
         }
-        if (flag) {
+        return flag;
+    }
+    public String getTitle(WebDriver driver) throws InterruptedException {
+        String text = null;
+        waits = new WebDriverWaits(getDriver(),10);
+        waits.waitForNSeconds(5);
+        text = driver.getTitle();
+        if (text!=null) {
             log.debug("Title of the page is: \"" + text + "\"");
+        }else{
+            throw  new RuntimeException("Title of the page is null ");
         }
         return text;
     }
-
     public static void scrollByVisibilityOfElement(WebDriver driver, WebElement ele) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", ele);
@@ -146,7 +166,7 @@ public class DriverActions extends BaseClass {
         }
         return flag;
     }
-     public static boolean type(WebElement ele, String text) {
+    public static boolean type(WebElement ele, String text) {
         boolean flag = false;
         try {
             flag = ele.isDisplayed();
@@ -237,30 +257,6 @@ public class DriverActions extends BaseClass {
             }
         }
     }
-	/*public static boolean mouseHoverByJavaScript(WebElement ele) {
-		boolean flag = false;
-		try {
-			WebElement mo = ele;
-			String javaScript = "var evObj = document.createEvent('MouseEvents');"
-					+ "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);"
-					+ "arguments[0].dispatchEvent(evObj);";
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript(javaScript, mo);
-			flag = true;
-			return true;
-		}*/
-
-	/*	catch (Exception e) {
-
-			return false;
-		} finally {
-			if (flag) {
-				System.out.println("MouseOver Action is performed");
-			} else {
-				System.out.println("MouseOver Action is not performed");
-			}
-		}
-	}*/
     public static boolean JSClick(WebDriver driver, WebElement ele) {
         boolean flag = false;
         try {
@@ -285,31 +281,6 @@ public class DriverActions extends BaseClass {
         }
         return flag;
     }
-	/*public static boolean switchToFrameByIndex(WebDriver driver, int index) {
-		boolean flag = false;
-		try {
-			new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
-			driver.switchTo().frame(index);
-			flag = true;
-			return true;
-		} catch (Exception e) {
-
-			return false;
-		} finally {
-			if (flag) {
-				System.out.println("Frame with index \"" + index + "\" is selected");
-			} else {
-				System.out.println("Frame with index \"" + index + "\" is not selected");
-			}
-		}
-	}*/
-    /**
-     * This method switch the to frame using frame ID.
-     *
-     * @param idValue
-     *            : Frame ID wish to switch
-     *
-     */
     public static boolean switchToFrameById(WebDriver driver, String idValue) {
         boolean flag = false;
         try {
@@ -328,13 +299,6 @@ public class DriverActions extends BaseClass {
             }
         }
     }
-    /**
-     * This method switch the to frame using frame Name.
-     *
-     * @param nameValue
-     *            : Frame Name wish to switch
-     *
-     */
     public static boolean switchToFrameByName(WebDriver driver, String nameValue) {
         boolean flag = false;
         try {
@@ -574,13 +538,6 @@ public class DriverActions extends BaseClass {
         int a = rows.size() - 1;
         return a;
     }
-    /**
-     * Verify alert present or not
-     *
-     * @return: Boolean (True: If alert preset, False: If no alert)
-     *
-     */
-
     public static boolean Alert(WebDriver driver) {
         boolean presentFlag = false;
         Alert alert = null;
@@ -631,7 +588,6 @@ public class DriverActions extends BaseClass {
             return false;
         } // catch
     }
-
     public static String getCurrentURL(WebDriver driver) {
         boolean flag = false;
 
@@ -672,10 +628,6 @@ public class DriverActions extends BaseClass {
     public static void implicitWait(WebDriver driver, int timeOut) {
         driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
     }
-/*	public static void explicitWait(WebDriver driver, WebElement element, int timeOut) {
-		WebDriverWait wait = new WebDriverWait(driver, timeOut);
-		wait.until(ExpectedConditions.visibilityOf(element));
-	}*/
     public static void pageLoadTimeOut(WebDriver driver, int timeOut) {
         driver.manage().timeouts().pageLoadTimeout(timeOut, TimeUnit.SECONDS);
     }

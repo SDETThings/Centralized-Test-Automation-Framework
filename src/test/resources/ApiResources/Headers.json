@@ -1,0 +1,61 @@
+{
+  "HeaderDetails":
+  [
+    {
+      "EndpointName": "AddPet",
+      "EndpointDescription": "Adds a new pet to the store",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "FindPet",
+      "EndpointDescription": "Adds new pet to the store",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "CreateSingleUser",
+      "EndpointDescription": "Creates single users",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "FetchSingleUser",
+      "EndpointDescription": "Used to fetch details of single user",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "UpdateUser",
+      "EndpointDescription": "Used to update details of single user",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "DeleteUser",
+      "EndpointDescription": "Used to delete details of single user",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "Userlogin",
+      "EndpointDescription": "Used to login to the system",
+      "Headers": {
+        "accept": "application/json"
+      }
+    },
+    {
+      "EndpointName": "Userlogout",
+      "EndpointDescription": "Used to logout of the system",
+      "Headers": {
+        "accept": "application/json"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "EndpointDetails":
+    [
+      {
+        "EndpointName": "AddPet",
+        "EndpointDescription": "Adds new pet to the store",
+        "Url": "pet",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "FindPet",
+        "EndpointDescription": "Adds new pet to the store",
+        "Url": "pet/{petId}",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "CreateSingleUser",
+        "EndpointDescription": "Creates single users",
+        "Url": "user",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "FetchSingleUser",
+        "EndpointDescription": "Used to fetch details of single user",
+        "Url": "user/{username}",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "UpdateUser",
+        "EndpointDescription": "Used to update details of single user",
+        "Url": "user/{username}",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "DeleteUser",
+        "EndpointDescription": "Used to delete details of single user",
+        "Url": "user/{username}",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "Userlogin",
+        "EndpointDescription": "Used to login to the system",
+        "Url": "user/login",
+        "statusCode": 200
+      },
+      {
+        "EndpointName": "Userlogout",
+        "EndpointDescription": "Used to logout of the system",
+        "Url": "user/logout",
+        "statusCode": 200
+      }
+    ]
+}

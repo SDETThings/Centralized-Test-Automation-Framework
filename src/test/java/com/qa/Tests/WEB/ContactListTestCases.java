@@ -1,60 +1,91 @@
 package com.qa.Tests.WEB;
 
-import BasicUtils.CommonMethods;
-import DataHandlerUtils.JsonCompareUtils;
-import DataHandlerUtils.JsonOperations;
-import com.google.gson.JsonArray;
+import WEBHelper.WebDriverManager;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.qa.Base.BaseClass;
-import com.qa.CompositeFunctions.API.PetStoreCompositeFunctions;
 import com.qa.CompositeFunctions.WEB.ContactListCompositeFunctions;
-import com.qa.Step.API.PetStoreTestCaseSteps;
-import com.qa.Utils.APIReportLogging;
-import com.qa.Utils.EnvDataProvider;
-import com.qa.Utils.FrameworkComponentKeys;
-import com.qa.component.API.URIConstruction.ApplicationEndpoints;
-import com.qa.component.API.URIConstruction.Constants;
+import com.qa.Pages.client002.ContactListPage;
+import com.qa.DataProviders.WEBDataProvider;
 import com.qa.component.WEB.PageConstants.PageConstants;
+import com.qa.component.WEB.WEBReportLogging.WEBReportLogging;
 import dataUtils.MasterDataUtils;
-import io.restassured.response.Response;
-import org.testng.Assert;
-import org.testng.Reporter;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class ContactListTestCases extends BaseClass {
+import static com.qa.component.WEB.WEBReportLogging.WEBReportLogging.logWebExecutionStepIntoExtentReport;
+
+public class ContactListTestCases extends ContactListCompositeFunctions {
     ContactListCompositeFunctions contactListCompositeFunctions;
-    APIReportLogging apiReportLogging;
-    CommonMethods commonMethods;
-    JsonOperations jsonOperations;
     MasterDataUtils masterDataUtils;
-
+    WEBReportLogging webReportLogging;
+    private static final ThreadLocal<String> testCaseId = new ThreadLocal<>();
+    private static final ThreadLocal<String> environment = new ThreadLocal<>();
+    private static final ThreadLocal<String> client = new ThreadLocal<>();
+    private static final ThreadLocal<String> BrowserName = new ThreadLocal<>();
+    private static final ThreadLocal<String> BrowserVersion = new ThreadLocal<>();
+    private static final ThreadLocal<String> OSName = new ThreadLocal<>();
+    private static final ThreadLocal<String> OSVersion = new ThreadLocal<>();
+    private static final ThreadLocal<String> DeviceName = new ThreadLocal<>();
+    private static final ThreadLocal<String> AppVersion = new ThreadLocal<>();
+    private static final ThreadLocal<String> groupName = new ThreadLocal<>();
     @BeforeClass
-    public void PreRequisites() throws IOException {
+    public void PreRequisites() {
         setProperties();
-        readJSONDriver(prop.getProperty("testDataDriverJson"));
     }
-    @Parameters({"browser","url"})
-    @BeforeMethod()
-    public void setup(String browser,String url) {
-        launchAppliationURL(browser,url);
+    @BeforeMethod
+    public void BeforeExecutionStart(ITestResult iTestResult) {
+        testCaseId.set(iTestResult.getMethod().getMethodName());
+        try {
+            environment.set(getTestCaseMetaDataBlock(testCaseId.get()).get("Environment").getAsString());
+            client.set(getTestCaseMetaDataBlock(testCaseId.get()).get("Client").getAsString());
+            BrowserName.set(getTestCaseMetaDataBlock(testCaseId.get()).get("BrowserName").getAsString());
+            BrowserVersion.set(getTestCaseMetaDataBlock(testCaseId.get()).get("BrowserVersion").getAsString());
+            OSName.set(getTestCaseMetaDataBlock(testCaseId.get()).get("OSName").getAsString());
+            OSVersion.set(getTestCaseMetaDataBlock(testCaseId.get()).get("OSVersion").getAsString());
+            DeviceName.set(getTestCaseMetaDataBlock(testCaseId.get()).get("DeviceName").getAsString());
+            AppVersion.set(getTestCaseMetaDataBlock(testCaseId.get()).get("AppVersion").getAsString());
+            groupName.set(getTestCaseMetaDataBlock(testCaseId.get()).get("groupName").getAsString());
+            setWebDriver(WebDriverManager.getDriverProvider().setUpWebDriver(BrowserName.get()));
+            OpenApplication(environment.get());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
-    // Parameterizing test case run configuration metadata
-    @Test(description = "Login to Create contact website and create a contact",dataProvider = "getRunDetails_TC0003" ,dataProviderClass = EnvDataProvider.class,enabled=false)
-    public synchronized void TC0003(JsonElement testData) throws IOException, IllegalAccessException, InterruptedException {
-        String testCase = getTestCaseMetaDataBlock(Reporter.getCurrentTestResult().getMethod().getMethodName()).get(Constants.TESTCASE_FIELD).getAsString();
-        String runEnv = getTestCaseMetaDataBlock(Reporter.getCurrentTestResult().getMethod().getMethodName()).get(Constants.ENVIRONMENT_FIELD).getAsString();
-        String client = getTestCaseMetaDataBlock(Reporter.getCurrentTestResult().getMethod().getMethodName()).get(Constants.CLIENT_FIELD).getAsString();
-        setResults(runEnv,client);
+    @Test(description = "Login to Create contact website and create a contact",dataProvider = "getDataIterations" ,dataProviderClass = WEBDataProvider.class,enabled=false)
+    public void CON0001(JsonElement testDataSet) throws InterruptedException {
         contactListCompositeFunctions = new ContactListCompositeFunctions();
         masterDataUtils = new MasterDataUtils();
-        //Read master data from client json file
-        JsonArray completeTestCaseData = masterDataUtils.accessWebMobileMasterData(testData.getAsJsonObject());
-        Assert.assertEquals(contactListCompositeFunctions.validatePageTitle(),"Contact List App");
-        contactListCompositeFunctions.SignUpAsNewUser(completeTestCaseData );
-    }
+        if (testDataSet.getAsJsonObject().get("ACTIVE").getAsString().equalsIgnoreCase("Y")) {
+            ContactListPage contactListPage = ILoginAsExistingUser(getPageWiseData(testDataSet, PageConstants.landingPage));
+            contactListPage = IAddNewContact(getPageWiseData(testDataSet, PageConstants.contactLstPage),contactListPage);
 
+        }
+    }
+    @Test(description = "Login to Create contact website and create a contact",dataProvider = "getDataIterations" ,dataProviderClass = WEBDataProvider.class,enabled=false)
+    public void CON0002(JsonElement testDataSet) throws InterruptedException {
+        contactListCompositeFunctions = new ContactListCompositeFunctions();
+        masterDataUtils = new MasterDataUtils();
+        if (testDataSet.getAsJsonObject().get("ACTIVE").getAsString().equalsIgnoreCase("Y")) {
+            ContactListPage contactListPage = ILoginAsExistingUser(getPageWiseData(testDataSet, PageConstants.landingPage));
+            contactListPage = IAddNewContact(getPageWiseData(testDataSet, PageConstants.contactLstPage),contactListPage);
+
+        }
+    }
+/*    @Test(description = "Login to Create contact website and create a contact",enabled=false)
+    public synchronized void DockerTest() throws IOException, IllegalAccessException, InterruptedException {
+        ChromeOptions options = new ChromeOptions();
+       // options.addArguments()
+        URL url = new URL("http://localhost:4444/wd/hub");
+        driver = new RemoteWebDriver(url,options);
+        driver.get("https://thinking-tester-contact-list.herokuapp.com/");
+        System.out.println("Title of the page " + driver.getTitle());
+        driver.quit();
+    }*/
+    @AfterMethod()
+    public void tearDown()
+    {
+        WebDriverManager.getDriverProvider().quitBrowser();
+    }
 }
