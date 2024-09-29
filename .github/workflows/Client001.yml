@@ -1,0 +1,38 @@
+name: CLIENT001 TESTING WORKFLOW
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: self-hosted
+
+    environment: client001
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update TestCaseInputDriver json file
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: './src/test/resources/ClientTestCaseDriverFiles/TestCaseInputDriver.json'
+        env:
+          TestCaseRunConfiguration: ${{ vars.CLIENT001_TESTCASE_RUN_DETAILS }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Import core library
+        run: mvn -s settings.xml install -DskipTests
+        env:
+          MAVEN_USER: ${{ secrets.OWNER_USERNAME }}
+          MAVEN_TOKEN: ${{ secrets.OWNER_TOKEN }}
+
+      - name: Run test cases
+        run: mvn clean compile test --file pom.xml'

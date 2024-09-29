@@ -5,49 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6650dd5a-78a5-4888-8bbd-050e420cdaae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/ReportLogging/APIReportLogging.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/APIReportLogging.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/EnvDataProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/DataProviders/WEBDataProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/TestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Utils/TestListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/Certificates/ClientCertificate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/Certificates/ClientCertificate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/RequestTypes/RestUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/APIVersions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/APIVersions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/DriverActionables/DriverActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/DriverActionables/DriverActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/PageConstants/PageConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/PageConstants/PageConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/Urls/WebUrls.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/API/PetStoreCompositeFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/API/PetStoreCompositeFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/WEB/ContactListCompositeFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/WEB/ContactListCompositeFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/addUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/addUserPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/contactListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/contactListPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/landingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/landingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/AddUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/AddUserPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/ContactListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/ContactListPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/LandingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/LandingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Step/API/PetStoreTestCaseSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Step/API/PetStoreTestCaseSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Step/WEB/ContactListTestCaseSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Step/WEB/ContactListTestCaseSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Tests/API/PetStoreTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Tests/API/PetStoreTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT001/getBearerToken_RequestPayload.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT001/placePetOrder_RequestPayload.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT002/RequestPayload.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT002/addPets_RequestPayload.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT003/RequestPayload.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT003/addPets_RequestPayload.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT001/Client001CaseMasterData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT001/Client001CaseMasterData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT002/Client002CaseMasterData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT002/Client002CaseMasterData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/Client001_TestDriver.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/TestCaseInputDriver.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/Client002_TestDriver.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/Client003_TestDriver.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/TestCaseResults/TC0003_20240525154058/TC0003_REPORT_20240525154058.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/TestCaseResults/TC0003_20240525154132/TC0003_REPORT_20240525154132.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/testDataDriver.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testDataDriver.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testng.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
