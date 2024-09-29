@@ -14,7 +14,7 @@
     <repository>
       <id>github</id>
       <name>GitHub OWNER Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/kunalbiswas92/Genesis-Core-Library</url>
+      <url>https://maven.pkg.github.com/SDETThings/Genesis-Core-Library</url>
     </repository>
   </distributionManagement>
 
@@ -24,7 +24,7 @@
 <repositories>
   <repository>
     <id>github</id>
-    <url>https://maven.pkg.github.com/kunalbiswas92/Genesis-Core-Library</url>
+    <url>https://maven.pkg.github.com/SDETThings/Genesis-Core-Library</url>
     <snapshots>
       <enabled>true</enabled>
     </snapshots>
