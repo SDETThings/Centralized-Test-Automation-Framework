@@ -1,6 +1,8 @@
 name: CLIENT001 TESTING WORKFLOW
 on:
   workflow_dispatch:
+  repository_dispatch: # Triggered by an external webhook
+    types: [ trigger-test-case-run ]  # Custom event type
 
 jobs:
   build:
@@ -14,6 +16,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Clear TestCaseInputDriver JSON file (if webhook input is available)
+        run: |
+          if [ -n "${{ github.event.client_payload.TestCaseRunConfiguration }}" ]; then
+          echo '{}' > ./src/test/resources/ClientTestCaseDriverFiles/TestCaseInputDriver.json
+          echo "Cleared TestCaseInputDriver.json for webhook input."
+          fi
+
+      - name: Update TestCaseInputDriver JSON file from webhook payload (if available)
+        if: github.event_name == 'repository_dispatch' && github.event.client_payload.TestCaseRunConfiguration  # Runs only if triggered by webhook and payload exists
+        run: |
+          echo '${{ toJson(github.event.client_payload.TestCaseRunConfiguration) }}' >> ./src/test/resources/ClientTestCaseDriverFiles/TestCaseInputDriver.json
+          echo "Updated TestCaseInputDriver.json with webhook payload."
 
       - name: Update TestCaseInputDriver json file
         uses: microsoft/variable-substitution@v1
