@@ -1,4 +1,4 @@
-name: CLIENT001 TESTING WORKFLOW
+name: CLIENT002 TESTING WORKFLOW
 on:
   workflow_dispatch:
   repository_dispatch: # Triggered by an external webhook
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     environment: client001
     permissions:
@@ -35,7 +35,7 @@ jobs:
         with:
           files: './src/test/resources/ClientTestCaseDriverFiles/TestCaseInputDriver.json'
         env:
-          TestCaseRunConfiguration: ${{ vars.CLIENT001_TESTCASE_RUN_DETAILS }}
+          TestCaseRunConfiguration: ${{ vars.CLIENT002_TESTCASE_RUN_DETAILS }}
 
       - name: Set up JDK
         uses: actions/setup-java@v2
