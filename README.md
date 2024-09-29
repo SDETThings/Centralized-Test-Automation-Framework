@@ -15,6 +15,8 @@ Logging and Reporting
 Continuous Integration / Continuous Deployment
 Best Practices
 Contributing
+
+
 Features
 Java-based Test Automation framework.
 API Testing with Rest Assured.
