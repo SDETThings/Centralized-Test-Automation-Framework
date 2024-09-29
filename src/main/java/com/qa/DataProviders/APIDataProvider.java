@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 public class APIDataProvider extends BaseClass {
     private ThreadLocal<Object[][]> tl = new ThreadLocal();
     private ThreadLocal<Object[]> tl1 = new ThreadLocal();
-    MasterDataUtils masterDataUtils;
     public int findRowCount(TestDataDriver.Configurations[] test, String testCaseNumber) {
         int count = 0;
         for(int x = 0; x < test.length; ++x) {
@@ -215,8 +214,6 @@ tl.get()[index][x] = groupName;
         }
         return tl1.get();
     }
-
-    // Data provider to bring in test case metadata
     @DataProvider(name = "getDataIterations")
     public Object[] ConfigureTestCaseDataTC0001(Method method) throws IOException {
         JsonOperations jsonOperations = new JsonOperations();

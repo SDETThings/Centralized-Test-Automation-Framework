@@ -45,7 +45,7 @@ public class AddUserPage extends BaseClass {
                 driverActions.sendKeys(getDriver(),lastNameTextBox,pageData.get("lastName").getAsString());
             }
             if(isSuccesfull){
-                driverActions.sendKeys(getDriver(),emailTextBox,"Example"+generateRandomName()+pageData.get("email").getAsString());
+                driverActions.sendKeys(getDriver(),emailTextBox,"Example"+generateRandomName(10)+pageData.get("email").getAsString());
             }
             if(isSuccesfull){
                 driverActions.sendKeys(getDriver(),passwordTextBox,pageData.get("password").getAsString());
