@@ -9,7 +9,6 @@ import com.jayway.jsonpath.ReadContext;
 import com.qa.Utils.*;
 import com.aventstack.extentreports.Status;
 import com.google.gson.*;
-import com.qa.JsonModellers.*;
 import com.qa.component.API.Certificates.ClientCertificate;
 import com.qa.component.API.ReportLogging.APIReportLogging;
 import com.qa.component.API.URIConstruction.*;
@@ -26,13 +25,11 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -59,13 +56,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static com.qa.component.WEB.WEBReportLogging.WEBReportLogging.logWebExecutionStepIntoExtentReport;
-
 public class BaseClass {
     public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
     MasterDataUtils masterDataUtils;
     APIReportLogging apiReportlogging;
-    public static TestDataDriver testDataDriver;
     public static Properties prop;
     public ThreadLocal<List<JsonObject>> AllpayloadUsed = new ThreadLocal<>();
     public ThreadLocal<Map<String ,JsonElement>> AllpayloadUsed1 = new ThreadLocal<>();
@@ -75,20 +69,25 @@ public class BaseClass {
     public ThreadLocal<IOSDriver> LocalIOSDriver= new ThreadLocal<>();
     JsonOperations jsonOperations;
     public ThreadLocal<Integer> TestIterationCount= new ThreadLocal<>();
-
-
-    public synchronized String generateRandomName() {
+    public synchronized String generateRandomName(int nameLength) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
         Random random = new Random();
-        StringBuilder buffer = new StringBuilder(targetStringLength);
-        for (int i = 0; i < targetStringLength; i++) {
+        StringBuilder buffer = new StringBuilder(nameLength);
+        for (int i = 0; i < nameLength; i++) {
             int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
             buffer.append((char) randomLimitedInt);
         }
-        String generatedString = buffer.toString();
-        return generatedString;
+        return buffer.toString();
+    }
+    public synchronized String generateRandomDateOfBirthBetween(String dateStart,String dateEnd ) {
+        LocalDate startDate = LocalDate.of(Integer.parseInt(dateStart.split("./")[0]),Integer.parseInt(dateStart.split("./")[1]),Integer.parseInt(dateStart.split("./")[2]));
+        LocalDate endDate = LocalDate.of(Integer.parseInt(dateEnd.split("./")[0]),Integer.parseInt(dateEnd.split("./")[1]),Integer.parseInt(dateEnd.split("./")[2]));
+        long statEpochDay = startDate.toEpochDay();
+        long endEpochDay = endDate.toEpochDay();
+        long randomEpochDay = ThreadLocalRandom.current().nextLong(statEpochDay,endEpochDay+1);
+        LocalDate randomeDate = LocalDate.ofEpochDay(randomEpochDay);
+        return randomeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
     public synchronized String LaunchMobileDriver(String OsName, String deviceName, String osVersion,String AppId, String Description, String testCaseNumber) {
         String USERNAME = prop.getProperty("BSUSERNAME");
@@ -185,23 +184,14 @@ public class BaseClass {
     public synchronized WebDriver getWebDriver(){
         return LocalWebDriver.get();
     }
-    public synchronized String generateRandomDateOfBirthBetween(String dateStart,String dateEnd ) {
-        LocalDate startDate = LocalDate.of(Integer.parseInt(dateStart.split("./")[0]),Integer.parseInt(dateStart.split("./")[1]),Integer.parseInt(dateStart.split("./")[2]));
-        LocalDate endDate = LocalDate.of(Integer.parseInt(dateEnd.split("./")[0]),Integer.parseInt(dateEnd.split("./")[1]),Integer.parseInt(dateEnd.split("./")[2]));
-        long statEpochDay = startDate.toEpochDay();
-        long endEpochDay = endDate.toEpochDay();
-        long randomEpochDay = ThreadLocalRandom.current().nextLong(statEpochDay,endEpochDay+1);
-        LocalDate randomeDate = LocalDate.ofEpochDay(randomEpochDay);
-        return randomeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    }
-    public synchronized void readJSONDriver(String JsonDriverPath) throws IOException {
+/*    public synchronized void readJSONDriver(String JsonDriverPath) throws IOException {
         Gson gson = new Gson();
         FileReader reader = new FileReader(JsonDriverPath);
         testDataDriver = gson.fromJson(reader, TestDataDriver.class);
-    }
-    public synchronized TestDataDriver getRunConfigurations() {
+    }*/
+/*    public synchronized TestDataDriver getRunConfigurations() {
         return testDataDriver;
-    }
+    }*/
     public static void setProperties() {
         try {
             FileInputStream fis = new FileInputStream("./Config.properties");
@@ -817,7 +807,7 @@ String runOn = "Local";
         }
         else if(lastPart.equalsIgnoreCase("lastName"))
         {
-            return JsonParser.parseString(generateRandomName());
+            return JsonParser.parseString(generateRandomName(10));
         }
         else{
             return value;
@@ -1150,8 +1140,7 @@ String runOn = "Local";
         }
         return flag;
     }
-    public JsonObject getPageWiseData(JsonElement testDataSet,String pageIdentifier)
-    {
+    public JsonObject getPageWiseData(JsonElement testDataSet,String pageIdentifier) {
         masterDataUtils = new MasterDataUtils();
         return masterDataUtils.accessPageWiseWebMobileData(testDataSet, pageIdentifier);
     }

@@ -49,6 +49,21 @@ jobs:
         env:
           MAVEN_USER: ${{ secrets.OWNER_USERNAME }}
           MAVEN_TOKEN: ${{ secrets.OWNER_TOKEN }}
+          
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Chrome dependencies
+        run: |
+          sudo apt-get install -y \
+            libnss3 \
+            libgconf-2-4 \
+            libxss1 \
+            libasound2 \
+            fonts-liberation \
+            xdg-utils
 
       - name: Run test cases
         run: mvn clean compile test --file pom.xml
