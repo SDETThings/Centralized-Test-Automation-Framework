@@ -1,42 +1,40 @@
 package com.qa.Base;
 
-import com.qa.Utils.APIReportLogging;
-import com.qa.Utils.PdfUtils;
-import com.qa.Utils.ReportListeners;
-import com.qa.Utils.TestListener;
+import APIHelper.HeaderProvider;
+import APIHelper.RequestProvider;
+import APIHelper.UrlProvider;
+import com.aventstack.extentreports.ExtentTest;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
+import com.qa.Utils.*;
 import com.aventstack.extentreports.Status;
 import com.google.gson.*;
-import com.qa.JsonModellers.TestDataDriver;
-import com.qa.component.API.HeaderConstruction.Headers;
-import com.qa.component.API.URIConstruction.APIVersions;
-import com.qa.component.API.URIConstruction.ApplicationEndpoints;
-import com.qa.component.API.URIConstruction.EnvironmentBaseUrls;
-import com.qa.component.API.URIConstruction.Constants;
-import com.qa.component.API.RequestTypes.RestUtils;
+import com.qa.JsonModellers.*;
+import com.qa.component.API.Certificates.ClientCertificate;
+import com.qa.component.API.ReportLogging.APIReportLogging;
+import com.qa.component.API.URIConstruction.*;
 import DataHandlerUtils.JsonCompareUtils;
-import com.qa.component.WEB.DriverActionables.DriverActions;
-import com.qa.component.WEB.PageConstants.PageConstants;
-import com.qa.component.WEB.Urls.WebUrls;
-import fileUtils.FileUtils;
+import dataUtils.MasterDataUtils;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.config.DriverManagerType;
 import io.restassured.RestAssured;
+import io.restassured.config.SSLConfig;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import DataHandlerUtils.JsonOperations;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.json.Json;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -46,6 +44,11 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -53,8 +56,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static com.qa.component.WEB.WEBReportLogging.WEBReportLogging.logWebExecutionStepIntoExtentReport;
+
 public class BaseClass {
-    public static ThreadLocal<WebDriver> tl = new ThreadLocal<>();
+    public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
+    MasterDataUtils masterDataUtils;
     APIReportLogging apiReportlogging;
     public static TestDataDriver testDataDriver;
     public static Properties prop;
@@ -64,7 +73,7 @@ public class BaseClass {
     public ThreadLocal<RemoteWebDriver> LocalRemoteWebDriver= new ThreadLocal<>();
     public ThreadLocal<AndroidDriver> LocalAndroidDriver= new ThreadLocal<>();
     public ThreadLocal<IOSDriver> LocalIOSDriver= new ThreadLocal<>();
-    JsonOperations jsonOperations= new JsonOperations();
+    JsonOperations jsonOperations;
     public ThreadLocal<Integer> TestIterationCount= new ThreadLocal<>();
 
 
@@ -202,7 +211,7 @@ public class BaseClass {
             var2.printStackTrace();
         }
     }
-    public synchronized void setResults(String env, String client) {
+    public synchronized void setResults(String testCaseId, String env, String client,JsonElement dataSet) {
         String testResultsFolder = ReportListeners.getCurrentTestResultsFolder();
         File file = new File(testResultsFolder);
         ITestResult result = Reporter.getCurrentTestResult();
@@ -210,16 +219,7 @@ public class BaseClass {
         result.setAttribute("client",client);
         result.setAttribute("documentId",file.getName());
         result.setAttribute("testCaseFolder",testResultsFolder);
-    }
-    public synchronized void setResults(String env, String client,String uniqueIdentifier) {
-        String testResultsFolder = ReportListeners.getCurrentTestResultsFolder();
-        File file = new File(testResultsFolder);
-        ITestResult result = Reporter.getCurrentTestResult();
-        result.setAttribute("env",env);
-        result.setAttribute("client",client);
-        result.setAttribute("documentId",file.getName());
-        result.setAttribute("testCaseFolder",testResultsFolder);
-        result.setAttribute("uniqueIdentifier",uniqueIdentifier);
+        result.setAttribute("testCaseDescription",dataSet.getAsJsonObject().get("DESCRIPTION"));
     }
     public synchronized void setResults(String env, String client,String testCaseFolderPath,String Link,String TestData,String BrowserDetails) {
         File file = new File(testCaseFolderPath);
@@ -239,8 +239,7 @@ public class BaseClass {
     public synchronized void storeTestDataJsonIntoListForDatabaseConsumption(List<String> payloadList , String mainframeData) {
         payloadList.add(mainframeData);
     }
-    public synchronized void
-    storeTestDataJsonIntoListForDatabaseConsumption(Map<String,JsonElement> payloadList , JsonElement jsonObject,String url) {
+    public synchronized void storeTestDataJsonIntoListForDatabaseConsumption(Map<String,JsonElement> payloadList , JsonElement jsonObject,String url) {
         payloadList.put(" \""+url+"\" "+":",jsonObject);
         AllpayloadUsed1.set(payloadList);
     }
@@ -262,7 +261,6 @@ public class BaseClass {
                 folder = new File(folderPath);
                 break;
             default:
-                apiReportlogging.logMessageStringIntoExtentReport(Status.WARNING,"Unable to find the request payload folder for client : ||"+ client + "|| Please add the new request payload folder for the client or correct existing client id ");
         }
         if (folder.exists() && folder.isDirectory()) {
             File[] jsonFiles = folder.listFiles((dir, name) -> name.endsWith(".json"));
@@ -308,7 +306,6 @@ public class BaseClass {
                 break;
             }
             default:
-                apiReportlogging.logMessageStringIntoExtentReport(Status.WARNING,"Client Name not found for client id || " + clientId + " ||");
         }
         return clientName;
     }
@@ -409,7 +406,6 @@ public class BaseClass {
                 masterDataPath=prop.getProperty("Client003TestCaseDataJson");
                 break;
             default:
-                apiReportlogging.logMessageStringIntoExtentReport(Status.WARNING,"Master data sheet for the client : ||"+ client + "|| does not exist, Please add a new client or correct existing client id");
         }
         return masterDataPath;
     }
@@ -451,7 +447,7 @@ public class BaseClass {
     }
     public String getEnvironmentBaseURL(String env,String client,String baseUrlType, String endpointName) {
         String baseURl = null;
-        if(endpointName.contains(Constants.GET_RESTFULL_BOOKER_AUTH_TOKEN))
+        if(endpointName.contains(Constants.ADD_NEW_PET))
         {
             baseURl = EnvironmentBaseUrls.RESFTULL_BOOKER_BASE_URL;
         }
@@ -492,7 +488,6 @@ public class BaseClass {
                             }
                         }
                             default:
-                                apiReportlogging.logMessageStringIntoExtentReport(Status.WARNING, "Environment base url is not found for environment : ||" + env + "|| Please add the new environment or correct environment");
             }
         }
 
@@ -523,7 +518,7 @@ public class BaseClass {
 
         return endpointName;
     }
-    public synchronized Response UploadEvidenceAPIRequest(String filePath) {
+   /* public synchronized Response UploadEvidenceAPIRequest(String filePath) {
         String BaseUrl =prop.getProperty("GenesisBaseUploadUrl");
         String endpoint = "v1/uploadTestEvidence";
         String completeRequestURIString = BaseUrl + endpoint;
@@ -535,7 +530,7 @@ public class BaseClass {
                 .when()
                 .post(completeRequestURIString);
         return res;
-    }
+    }*/
     public synchronized String getTestCaseStatus(boolean booleanStatus) {
         String status;
         if(booleanStatus)
@@ -546,7 +541,7 @@ public class BaseClass {
         }
         return status;
     }
-    public synchronized Response sendAPIExecutionDetails(ITestResult iTestResult) throws ParseException, IOException {
+   /* public synchronized Response sendAPIExecutionDetails(ITestResult iTestResult) throws ParseException, IOException {
         String testData;
         String testCaseId = iTestResult.getName();
         String result = getTestCaseStatus(iTestResult.isSuccess());
@@ -563,18 +558,18 @@ public class BaseClass {
         String executionLink = "";
         String client = iTestResult.getAttribute("client").toString();
         String browserOrOsVersion = "";
-/*if(prop.getProperty("RunOn").equalsIgnoreCase("Local"))
+*//*if(prop.getProperty("RunOn").equalsIgnoreCase("Local"))
 {
 String runOn = "Local";
-}*/
+}*//*
         String env = iTestResult.getAttribute("env").toString();
         JsonObject databasePayload =
                 createRequestPayloadForDatabaseExecutionEntry( testCaseId,result,testData,excecutionDateTime,
                         documentId,executionLog,executionLink,client,env,browserOrOsVersion);
         Response response = hitExecutionResultsDatabaseAPI(databasePayload);
         return response;
-    }
-    public synchronized Response sendExecutionDetails(ITestResult iTestResult,String link, String TestData,String BrowserDetails) throws ParseException, IOException {
+    }*/
+/*    public synchronized Response sendExecutionDetails(ITestResult iTestResult,String link, String TestData,String BrowserDetails) throws ParseException, IOException {
         String testData;
         String testCaseId = iTestResult.getName();
         String result = getTestCaseStatus(iTestResult.isSuccess());
@@ -602,8 +597,8 @@ String runOn = "Local";
                         documentId,executionLog,executionLink,client,env,browserOrOsVersion);
         Response response = hitExecutionResultsDatabaseAPI(databasePayload);
         return response;
-    }
-    public synchronized Response sendHybridExecutionDetails(ITestResult iTestResult) throws ParseException, IOException {
+    }*/
+    /*public synchronized Response sendHybridExecutionDetails(ITestResult iTestResult) throws ParseException, IOException {
         String testData;
         String testCaseId = iTestResult.getName();
         String result = getTestCaseStatus(iTestResult.isSuccess());
@@ -625,8 +620,8 @@ String runOn = "Local";
                         documentId,executionLog,executionLink,client,env,browserOrOsVersion);
         Response response = hitExecutionResultsDatabaseAPI(databasePayload);
         return response;
-    }
-    public synchronized Response hitExecutionResultsDatabaseAPI(JsonObject jsonObject) {
+    }*/
+/*    public synchronized Response hitExecutionResultsDatabaseAPI(JsonObject jsonObject) {
         String payloadBody = jsonObject.toString();
         String BaseUrl = prop.getProperty("GenesisBaseURL");
         String endpoint = "v1/addTestExecution";
@@ -639,7 +634,7 @@ String runOn = "Local";
                 .when()
                 .post(completeRequestURIString);
         return res;
-    }
+    }*/
     public synchronized JsonObject createRequestPayloadForLogEntry( String documentId, String uniqueIdentifier ) throws IOException {
         JsonObject jobj =
                 jsonOperations.readJsonFileAndStoreInJsonObject(prop.getProperty("LogAnalysisRequestPayloadFolderPath"));
@@ -715,21 +710,6 @@ String runOn = "Local";
         }
         return false;
     }
-    public synchronized Response sendLogInformation(JsonObject jsonObject) {
-        RestUtils restUtils = new RestUtils();
-        String payloadBody = jsonObject.toString();
-        String BaseUrl = prop.getProperty("GenesisBaseURL");
-        String endpoint = "v1/getAppInsightLogAnalysisFramework";
-        String completeRequestURIString = BaseUrl + endpoint;
-        Response response = restUtils.requestAsync(Method.POST, Constants.CONTENTTYPE_APPLICATIONJSON,completeRequestURIString,null,null,payloadBody,null,null,null);
-        return response;
-    }
-    public void setUniqueIdentifier(Response response,String whatKeyValueToSend, String env,String client) {
-        if(response.jsonPath().get(whatKeyValueToSend)!=null)
-        {
-            setResults(env, client,response.jsonPath().get("id"));
-        }
-    }
     public synchronized String[] getCertificateFromLocalBasedOnClient(String clientId) {
         String clientName = getClientName(clientId) ;
         String[] credentials = new String[2];
@@ -747,7 +727,7 @@ String runOn = "Local";
         }
         return credentials;
     }
-    public synchronized void afterTestApiActivities(ITestResult iTestResult) throws ParseException, IOException, InterruptedException {
+   /* public synchronized void afterTestApiActivities(ITestResult iTestResult) throws ParseException, IOException, InterruptedException {
         FileUtils fileUtils = new FileUtils();
         String TestCaseResultsZipFolder = prop.getProperty("TestCaseResultsZipFolder");
         String resultsFolder = iTestResult.getAttribute("testCaseFolder").toString();
@@ -762,7 +742,7 @@ String runOn = "Local";
 // Send Execution file
         Response uploadEvidenceResponse = UploadEvidenceAPIRequest(fileToBeSent);
         Assert.assertEquals(uploadEvidenceResponse.getStatusCode(), 200);
-    }
+    }*/
     public synchronized void setRetryCount(int count) {
         TestIterationCount.set(count);
     }
@@ -821,6 +801,28 @@ String runOn = "Local";
         }
         return frameworkMap;
     }
+    public synchronized JsonElement getFrameworkGenertedValues(String key) {
+        JsonElement value=null;
+        String lastPart;
+        if(key.contains("."))
+        {
+            lastPart= key.split("\\.")[key.split("\\.").length-1];
+
+        }else{
+            lastPart = key;
+        }
+        if(lastPart.equalsIgnoreCase("id"))
+        {
+           return JsonParser.parseString(String.valueOf(generateRandomNumber(3)));
+        }
+        else if(lastPart.equalsIgnoreCase("lastName"))
+        {
+            return JsonParser.parseString(generateRandomName());
+        }
+        else{
+            return value;
+        }
+    }
     public synchronized JsonObject getTestCaseMetaDataBlock(String testCaseNumber) throws FileNotFoundException {
         JsonObject requiredBlock = null;
         FileReader reader = new FileReader(prop.getProperty("testDataDriverJson"));
@@ -834,6 +836,14 @@ String runOn = "Local";
         }
         return requiredBlock;
 }
+    public synchronized int generateRandomNumber(int size) {
+        int lowerBound = (int) Math.pow(10, size - 1);
+        int upperBound = (int) Math.pow(10, size) - 1;
+
+        // Generate and return a random integer within that range
+        Random random = new Random();
+        return lowerBound + random.nextInt(upperBound - lowerBound + 1);
+    }
     public synchronized String getCurrentDate() {
         // Get the current date
         LocalDate currentDate = LocalDate.now();
@@ -844,36 +854,11 @@ String runOn = "Local";
 
         return formattedDate;
     }
-    public void launchAppliationURL(String browserName,String applicationUrl) {
-        WebDriverManager.chromedriver().clearDriverCache().setup();
-        if (browserName.equalsIgnoreCase("chrome")) {
-           // WebDriverManager.chromedriver().clearDriverCache().setup();
-            WebDriverManager.chromedriver().setup();
-            tl.set(new ChromeDriver());
-        }
-        if (browserName.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            tl.set(new FirefoxDriver());
-        }
-        if (browserName.equalsIgnoreCase("IE")) {
-            WebDriverManager.iedriver().setup();
-            tl.set(new InternetExplorerDriver());
-        }
-        if (browserName.equalsIgnoreCase("Edge")) {
-            WebDriverManager.edgedriver().setup();
-            tl.set(new EdgeDriver());
-        }
-        getDriver().manage().deleteAllCookies();
-        getDriver().manage().window().maximize();
-        // browser is launched
-        DriverActions.implicitWait(getDriver(), 10);
-        DriverActions.pageLoadTimeOut(getDriver(), 20);
-        // launch the application URL
-        getDriver().get(applicationUrl);
+    public static WebDriver getDriver() {
+        return tlDriver.get();
     }
-    public static synchronized WebDriver getDriver() {
-        WebDriver tlDriver = tl.get();
-        return tlDriver;
+    public static synchronized void setWebDriver(WebDriver driver){
+        tlDriver.set(driver);
     }
     public Object getPageClassObject(String client,String PageClassConstant) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, MalformedURLException {
         String pageFolderPath = null;
@@ -907,4 +892,301 @@ String runOn = "Local";
         }
         return instance;
     }
+    public synchronized  JsonElement getValueFromComplexNestedPayload(JsonObject jsonObject, String path){
+        String[] parts = path.split("\\.");
+        JsonElement currentElement = jsonObject;
+
+        for (String part : parts) {
+            if (part.contains("[") && part.contains("]")) {
+                // Handle array index
+                String arrayName = part.substring(0, part.indexOf("["));
+                int index = Integer.parseInt(part.substring(part.indexOf("[") + 1, part.indexOf("]")));
+                JsonArray jsonArray = currentElement.getAsJsonObject().getAsJsonArray(arrayName);
+                currentElement = jsonArray.get(index);
+            } else {
+                // Handle object key
+                currentElement = currentElement.getAsJsonObject().get(part);
+            }
+        }
+
+        return currentElement;
+    }
+    private static void updateJsonWithKeyPath(JsonObject json, String keyPath, JsonElement newValue) {
+        String[] keys = keyPath.split("\\.");
+        JsonObject currentObj = json;
+
+        for (int i = 0; i < keys.length; i++) {
+            String key = keys[i];
+
+            // Check for array access
+            if (key.contains("[") && key.contains("]")) {
+                String arrayKey = key.substring(0, key.indexOf("["));
+                int arrayIndex = Integer.parseInt(key.substring(key.indexOf("[") + 1, key.indexOf("]")));
+
+                // Navigate to the array
+                if (!currentObj.has(arrayKey)) {
+                    currentObj.add(arrayKey, new JsonArray());
+                }
+
+                JsonArray array = currentObj.getAsJsonArray(arrayKey);
+
+                // Ensure the array is large enough
+                while (array.size() <= arrayIndex) {
+                    array.add(new JsonObject());
+                }
+
+                currentObj = array.get(arrayIndex).getAsJsonObject();
+            }
+            else {
+                // Normal object key
+                if (i == keys.length - 1) {
+                    // Last key, update the value
+                    currentObj.add(key, newValue);
+                } else {
+                    // Create a new object if it doesn't exist
+                    if (!currentObj.has(key)) {
+                        currentObj.add(key, new JsonObject());
+                    }
+                    currentObj = currentObj.getAsJsonObject(key);
+                }
+            }
+        }
+    }
+    public String getUrlReplaced(String url , Map<String, String> valuesMap) {
+        String completeFinalUrl=url ;
+        for (Map.Entry<String, String> entry : valuesMap.entrySet()) {
+            completeFinalUrl = url.replaceAll("\\{" + entry.getKey() + "\\}", entry.getValue());
+        }
+        return completeFinalUrl;
+    }
+    public int getExpectedStatusCode(String endpointName) throws FileNotFoundException {
+        Gson gson = new Gson();
+        int statusCode = 0;
+        JsonObject endpointDetailsFile = gson.fromJson(new FileReader(prop.getProperty("EndpointsJsonFile")), JsonObject.class);
+        if(endpointDetailsFile.has("EndpointDetails")){
+            for(JsonElement endpointDetails:endpointDetailsFile.getAsJsonArray("EndpointDetails")){
+                if(endpointDetails.getAsJsonObject().get("EndpointName").getAsString().equalsIgnoreCase(endpointName)){
+                    statusCode= endpointDetails.getAsJsonObject().get("statusCode").getAsInt();
+                }
+            }
+        }
+        return statusCode;
+    }
+    public JsonObject IcallBuildRequestPayload(String client, String endpointConstant, JsonObject requestPayloadFieldsToModify,Response... previousResponse) throws IOException {
+        jsonOperations = new JsonOperations();
+        masterDataUtils = new MasterDataUtils();
+        apiReportlogging = new APIReportLogging();
+        Gson gson = new Gson();
+        JsonObject unalteredPayloadBody = jsonOperations.readJsonFileAndStoreInJsonObject(findJsonPayloadFile(client,endpointConstant));
+        JsonObject alteredPayload = unalteredPayloadBody;
+        for(Map.Entry<String,JsonElement> entry: requestPayloadFieldsToModify.entrySet())
+        {
+            ReadContext originalJsonMasterPayload = JsonPath.parse(alteredPayload.toString());
+            Object value = originalJsonMasterPayload.read("$."+entry.getKey());
+            if(value.toString().equalsIgnoreCase("{{static}}")) {
+                Object obj = JsonPath.parse(alteredPayload.toString()).set("$."+entry.getKey(),entry.getValue()).json();
+                String payloadString = gson.toJson(obj);
+                alteredPayload = JsonParser.parseString(payloadString).getAsJsonObject();
+            }
+            else if(value.toString().equalsIgnoreCase("{{dynamic}}")){
+                JsonElement valueToBeModified = previousResponse[0].jsonPath().get(entry.getKey());
+                Object obj = JsonPath.parse(alteredPayload.toString()).set("$."+entry.getKey(),valueToBeModified).json();
+                String payloadString = gson.toJson(obj);
+                alteredPayload = JsonParser.parseString(payloadString).getAsJsonObject();
+            }
+            else if(value.toString().equalsIgnoreCase("")){
+                Object obj = JsonPath.parse(alteredPayload.toString()).set("$."+entry.getKey(),getFrameworkGenertedValues(entry.getKey())).json();
+                String payloadString = gson.toJson(obj);
+                alteredPayload = JsonParser.parseString(payloadString).getAsJsonObject();
+            }
+        }
+        return alteredPayload;
+
+    }
+    public Response IcallExecuteEndpoint(ExtentTest test,Method method , String contentType, String UrlType, JsonObject payload, Map<String ,String> formParams, Map<String ,String> queryParams, Map<String ,String> pathParams , String client, String env, String endpointConstant, int expectedStatusCode , Map<String ,JsonElement> payloadList, Map<String,String>... urlReplacementValues) throws IllegalAccessException, IOException, UnrecoverableKeyException, CertificateException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+        apiReportlogging = new APIReportLogging();
+        SSLConfig sslConfig = null;
+        String payloadString;
+        ClientCertificate clientCertificate;
+        if(payload!=null)
+        {
+            payloadString = payload.toString();
+            storeTestDataJsonIntoListForDatabaseConsumption(payloadList,payload,getCompleteUrl(env,client,endpointConstant,UrlType,urlReplacementValues));
+            System.out.println(AllpayloadUsed1.get());
+        }else{
+            payloadString = null;
+        }
+        if(getClientName(client).equalsIgnoreCase("CLIENT002") || getClientName(client).equalsIgnoreCase("CLIENT003")){
+            clientCertificate = new ClientCertificate();
+            sslConfig = clientCertificate.LoadPfxCertFromLocal(prop.getProperty("ClientCertificateFilePath"),"pass");
+        }
+        String completeUrl = getCompleteUrl(env,client,endpointConstant,UrlType,urlReplacementValues);
+        Map<String, String> headers = HeaderProvider.getProvider().getHeaders(endpointConstant, prop.getProperty("HeadersJsonFile"));
+        Response response = RequestProvider.getProvider().request(method,contentType,completeUrl,headers,formParams, payloadString, queryParams, pathParams, sslConfig);
+        apiReportlogging.logApiCallDetailsInExtentReport(test,Status.INFO,method,payload,completeUrl,headers,response);
+        Assert.assertEquals(response.getStatusCode(),expectedStatusCode);
+
+        return response;
+    }
+    public Map<String,JsonElement> IcallResponseValidation(ExtentTest test , Response actualResponse, JsonObject expectedResponsePayloadFieldsToValidate,Response... previousResponse) {
+        Gson gson = new Gson();
+        apiReportlogging = new APIReportLogging();
+        Map<String,JsonElement> mismatches = new ConcurrentHashMap<>();
+        Map<String,JsonElement> expectedModifiedMap = new ConcurrentHashMap<>();
+
+        if(previousResponse.length>0) {
+            for(Map.Entry<String, JsonElement> entry : expectedResponsePayloadFieldsToValidate.entrySet())
+            {
+                if(entry.getValue().getAsString().startsWith("%")){
+                    JsonElement referenceValue = gson.toJsonTree(previousResponse[0].jsonPath().get(entry.getValue().getAsString().substring(1)));
+                    expectedModifiedMap.put(entry.getKey(),referenceValue);
+                    JsonElement actualValue = gson.toJsonTree(actualResponse.jsonPath().get(entry.getKey()));
+                    if(!referenceValue.equals(actualValue))
+                    {
+                        mismatches.put(entry.getKey(),actualValue);
+                    }
+                }
+                else if(entry.getValue().getAsString().equalsIgnoreCase("not null")){
+                    JsonElement actualValue = gson.toJsonTree(actualResponse.jsonPath().get(entry.getKey()));
+                    expectedModifiedMap.put(entry.getKey(),entry.getValue());
+                    if(actualValue.isJsonNull()){
+                        mismatches.put(entry.getKey(),actualValue);
+                    }
+                }
+                else {
+                    JsonElement actualValue = gson.toJsonTree(actualResponse.jsonPath().get(entry.getKey()));
+                    JsonElement expectedValue = gson.toJsonTree(entry.getValue());
+                    expectedModifiedMap.put(entry.getKey(),expectedValue);
+                    if(!actualValue.equals(expectedValue)){
+                        mismatches.put(entry.getKey(),actualValue);
+                    }
+                }
+            }
+        }
+        else {
+            for(Map.Entry<String, JsonElement> entry : expectedResponsePayloadFieldsToValidate.entrySet())
+            {
+                if(entry.getValue().getAsString().equalsIgnoreCase("not null")){
+                    JsonElement actualValue = actualResponse.jsonPath().get(entry.getKey());
+                    expectedModifiedMap.put(entry.getKey(),entry.getValue());
+                    if(actualValue.isJsonNull()){
+                        mismatches.put(entry.getKey(),actualValue);
+                    }
+                }
+                else {
+                    JsonElement actualValue = actualResponse.jsonPath().get(entry.getKey());
+                    JsonElement expectedValue = entry.getValue();
+                    expectedModifiedMap.put(entry.getKey(),expectedValue);
+                    if(!actualValue.equals(expectedValue)){
+                        mismatches.put(entry.getKey(),actualValue);
+                    }
+                }
+            }
+        }
+        if(!mismatches.isEmpty())
+        {
+            apiReportlogging.logResponseValidationResultsToExtentReport(test,Status.INFO,actualResponse,gson.toJsonTree(expectedModifiedMap).getAsJsonObject());
+            Map<String,JsonElement> mismatchedModifiedMap = mismatches.entrySet().stream()
+                    .filter(entry->expectedModifiedMap.containsKey(entry.getKey()))
+                    .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+            apiReportlogging.logMismatchedValidationResultsToExtentReport(test,Status.FAIL,mismatchedModifiedMap);
+
+        }else{
+            apiReportlogging.logResponseValidationResultsToExtentReport(test,Status.INFO,actualResponse,gson.toJsonTree(expectedModifiedMap).getAsJsonObject());
+            apiReportlogging.logEndpointSuccesMessageIntoExtentReport(test);
+        }
+        Assert.assertEquals(mismatches.size(), 0);
+
+        return mismatches;
+    }
+    public String getCompleteUrl(String env,String client,String endpointConstant,String urlType,Map<String,String>... urlReplacementValues) throws FileNotFoundException {
+
+        String completeUrl = UrlProvider.getProvider().getUrl(env,client,endpointConstant, urlType, prop.getProperty("BaseUrlsJsonFile"),prop.getProperty("EndpointsJsonFile"), prop.getProperty("ApiVersionJsonFile"));
+        if(completeUrl.contains("{")|| completeUrl.contains("}") && urlReplacementValues.length>0)
+        {
+            completeUrl = (completeUrl.contains("{")) ? getUrlReplaced(completeUrl, urlReplacementValues[0]) : completeUrl;
+        }
+        return completeUrl;
+    }
+    public String getEnvironmentUrl(String environment){
+        switch (environment){
+            case "DEV" -> {
+                return prop.getProperty("ContactsApplicationDEVUrl");
+            }
+            case "SIT" -> {
+                return prop.getProperty("ContactsApplicationSITUrl");
+            }
+            case "UAT" -> {
+                return prop.getProperty("ContactsApplicationUATUrl");
+            }
+            case "NFT" -> {
+                return prop.getProperty("ContactsApplicationNFTUrl");
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+    public boolean OpenUrl(String url){
+        getDriver().manage().window().maximize();
+        getDriver().manage().deleteAllCookies();
+        getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().pageLoadTimeout(20,TimeUnit.SECONDS);
+        getDriver().get(url);
+
+        return getDriver().getTitle().equalsIgnoreCase(prop.getProperty("ContactsApplicationLandingPageTitle"));
+    }
+    public boolean OpenApplication(String environment){
+        boolean flag=false;
+        if(getEnvironmentUrl(environment)!=null )
+        {
+            if(!OpenUrl(getEnvironmentUrl(environment)))
+            {
+                throw new IllegalArgumentException("Unable to open application url");
+            }else{
+                flag=true;
+            }
+        }
+        return flag;
+    }
+    public JsonObject getPageWiseData(JsonElement testDataSet,String pageIdentifier)
+    {
+        masterDataUtils = new MasterDataUtils();
+        return masterDataUtils.accessPageWiseWebMobileData(testDataSet, pageIdentifier);
+    }
+    public String takeScreenshot(WebDriver driver, String screenshotName,String screenshotDirectory ) {
+        // Capture the screenshot and define the destination file
+        String clickableImage= null;
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String screenshotPath = screenshotDirectory +"/"+ screenshotName + ".png";
+        File destinationPath = new File(screenshotPath);
+        String filePath = destinationPath.getAbsolutePath();
+        String base64Screenshot = null;
+        System.out.println("------------ fielPath : "+filePath);
+        // Copy the screenshot to the destination file
+        try {
+            FileUtils.copyFile(screenshot, destinationPath);
+            BufferedImage bufferedImage = ImageIO.read(destinationPath);
+
+            // Create a ByteArrayOutputStream to hold the image data
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            // Write the buffered image to the output stream in PNG format
+            ImageIO.write(bufferedImage, "png", baos);
+            // Get the byte array from the output stream
+            byte[] imageBytes = baos.toByteArray();
+
+            // Encode the byte array to Base64
+            base64Screenshot = Base64.getEncoder().encodeToString(imageBytes);
+            String img = "data:image/png;base64," + base64Screenshot;
+            clickableImage = "<a href=\"" + img + "\" target=\"_blank\">"
+                    + "<img src=\"" + img + "\" height=\"200\" width=\"200\"/></a>";
+            // Use Apache Commons IO to copy file
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return clickableImage;
+    }
+
 }

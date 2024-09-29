@@ -1,8 +1,0 @@
-{
-  "id": "0",
-  "petId": "{{static}}",
-  "quantity": "{{static}}",
-  "shipDate": "",
-  "status": "{{static}}",
-  "complete": true
-}

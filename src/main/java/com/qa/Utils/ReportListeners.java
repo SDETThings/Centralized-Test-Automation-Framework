@@ -1,4 +1,7 @@
 package com.qa.Utils;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.google.gson.JsonElement;
 import com.qa.Base.BaseClass;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -8,6 +11,8 @@ import com.google.gson.JsonParser;
 import fileUtils.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.json.Json;
 import org.testng.*;
 import ReportUtils.ExtentReport;
 
@@ -33,64 +38,17 @@ public class ReportListeners extends BaseClass implements ITestListener , IInvok
     @Override
     public synchronized void onStart(ITestContext iTestContext) {
     }
-   /* @Override
-    public synchronized  void onTestStart(ITestResult iTestResult) {
-        // String fileName = extentReport.getReportNameWithTimeStamp("yyyyMMdd");
-        String testName = iTestResult.getName();
-        if(iTestResult.getMethod().getCurrentInvocationCount()<1) {
-            String fileName = extentReport.getReportNameWithTimeStamp("yyyyMMdd");
-            String fullReportPath = fileUtils.createTestCaseResultsFolder(prop.getProperty("TestCaseResultPath"), testName,"yyyyMMddHHmmss");
-            currentTestResultsFolder.set(fullReportPath);
-            extent.set( exReport.BuildExtentReport(fullReportPath+"/"+fileName,"GENESIS_AUTOMATION","GENESIS_AUTOMATION_REPORT","dd/MM/yyyy hh:mm:ss"));
-            ExtentTest test = extent.get().createTest(testName);
-            extentTest.set(test);
-            extentTest.get().log(Status.INFO, testName + " : STARTED");
-            log.info(testName + " : STARTED");
-        }else {
-            File parentDirectory = new File(prop.getProperty("TestCaseResultPath"));
-            File[] testDirectories = parentDirectory.listFiles((dir,name)->name.startsWith(testName+"_"));
-            if(testDirectories!=null && testDirectories.length>0)
-            {
-                Arrays.sort(testDirectories, Comparator.comparingLong(File::lastModified).reversed());
-                File latestDirectory = testDirectories[0];
-                latestDirectory.getPath();
-                //String relativePath = parentDirectory.toURI().relativize(latestDirectory.toURI()).getPath();
-                currentTestResultsFolder.set(latestDirectory.getPath().toString());
-            }
-        }
-        *//*extent.set( exReport.BuildExtentReport(fullReportPath+"/"+fileName,"GENESIS_AUTOMATION","GENESIS_AUTOMATION_REPORT","dd/MM/yyyy hh:mm:ss"));
-        ExtentTest test = extent.get().createTest(testName);
-        extentTest.set(test);
-        extentTest.get().log(Status.INFO, iTestResult.getName() + " : STARTED");
-        log.info(iTestResult.getName() + " : STARTED");*//*
-}*/
    @Override
     public synchronized void onTestStart(ITestResult iTestResult) {
        String testName = iTestResult.getName();
-       int invocationCount = iTestResult.getMethod().getCurrentInvocationCount();
-       int interationCount = invocationCount+1;
+       JsonElement dataProvider = (JsonElement) iTestResult.getParameters()[0];
        String fileName = extentReport.getReportNameWithTimeStamp(testName,"yyyyMMddHHmmss");
-       String fullReportPath ;
-       if(invocationCount<1) {
-            fullReportPath = fileUtils.createTestCaseResultsFolder(prop.getProperty("TestCaseResultPath"), testName, "yyyyMMddHHmmss");
-            currentTestResultsFolder.set(fullReportPath);
-        }
-       else{
-           File parentDirectory = new File(prop.getProperty("TestCaseResultPath"));
-           File[] testDirectories = parentDirectory.listFiles((dir,name)->name.startsWith(testName+"_"));
-           if(testDirectories!=null && testDirectories.length>0)
-           {
-               Arrays.sort(testDirectories, Comparator.comparingLong(File::lastModified).reversed());
-               File latestDirectory = testDirectories[0];
-               latestDirectory.getPath();
-               //String relativePath = parentDirectory.toURI().relativize(latestDirectory.toURI()).getPath();
-               currentTestResultsFolder.set(latestDirectory.getPath().toString());
-           }
-       }
+       String fullReportPath = fileUtils.createTestCaseResultsFolder(prop.getProperty("TestCaseResultPath"), testName, "yyyyMMddHHmmss");
+       currentTestResultsFolder.set(fullReportPath);
         extent.set( exReport.BuildExtentReport(currentTestResultsFolder.get()+"/"+fileName,"GENESIS_AUTOMATION","GENESIS_AUTOMATION_REPORT","dd/MM/yyyy hh:mm:ss"));
-        ExtentTest test = extent.get().createTest(testName);
+        ExtentTest test = extent.get().createTest(testName,"<b>Description</b> : "+"<b><font color='yellow'>"+dataProvider.getAsJsonObject().get("DESCRIPTION").getAsString()+"</font></b>");
         extentTest.set(test);
-        extentTest.get().log(Status.INFO, testName + " : STARTED - Iteration: "+ interationCount);
+       // extentTest.get().log(Status.INFO, testName +" : "+"|| started for iteration - "+ dataProvider.getAsJsonObject().get("ITERATION_NUMBER").getAsString());
         log.info(testName + " : STARTED");
     }
     public synchronized static String getCurrentTestResultsFolder()
@@ -101,8 +59,9 @@ public class ReportListeners extends BaseClass implements ITestListener , IInvok
     public void onTestSuccess(ITestResult iTestResult) {
         try {
             String testName = iTestResult.getName();
-            extentTest.get().log(Status.PASS, testName + " passed");
-            String resultsFolder = iTestResult.getAttribute("testCaseFolder").toString();
+            //extentTest.get().log(Status.PASS, testName + " passed");
+            //String resultsFolder = iTestResult.getAttribute("testCaseFolder").toString();
+            String resultsFolder ="./src/test/resources/TestCaseResults/";
             extent.get().flush();
             extent.remove();
             extentTest.remove();
@@ -115,18 +74,20 @@ public class ReportListeners extends BaseClass implements ITestListener , IInvok
     @Override
     public synchronized void onTestFailure(ITestResult iTestResult) {
         String testName = iTestResult.getName();
-        ReportListeners.extentTest.get().log(Status.FAIL, iTestResult.getThrowable());
-        ReportListeners.extentTest.get().log(Status.FAIL, testName + " got failed");
         JsonObject logPayload;
-        if(iTestResult.getAttribute("documentId")!=null &&
-                iTestResult.getAttribute("uniqueIdentifier")!=null ) {
+       /* if(iTestResult.getAttribute("documentId")!=null && iTestResult.getAttribute("uniqueIdentifier")!=null ) {
             try {
                 logPayload = createRequestPayloadForLogEntry(iTestResult.getAttribute("documentId").toString(), iTestResult.getAttribute("uniqueIdentifier").toString());
                 //sendLogInformation(logPayload);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
+        }*/
+        // Capture screenshot on failure
+        String screenshotPath = takeScreenshot(getDriver(), iTestResult.getName(),currentTestResultsFolder.get());
+        // Attach the screenshot to the Extent Report
+        extentTest.get().log(Status.FAIL, "Test Failed: " + iTestResult.getName() + " - Screenshot: " + screenshotPath);
+        //ReportListeners.extentTest.get().log(Status.FAIL, (Markup) extentTest.get().addScreenCaptureFromPath(screenshotPath));
         extent.get().flush();
         extent.remove();
         extentTest.remove();

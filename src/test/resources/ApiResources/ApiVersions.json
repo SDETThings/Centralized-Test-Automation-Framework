@@ -1,0 +1,72 @@
+{
+  "Environments": [
+    {
+      "Environment": "PROD",
+      "ApiVersionDetails": [
+        {
+          "ApiVersionType": "APIM",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "FUNCTION_APP",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "PUBLIC_API",
+          "ApiVersion": "v2/"
+        }
+      ]
+    },
+    {
+      "Environment": "UAT",
+      "ApiVersionDetails": [
+        {
+          "ApiVersionType": "APIM",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "FUNCTION_APP",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "PUBLIC_API",
+          "ApiVersion": "v2/"
+        }
+      ]
+    },
+    {
+      "Environment": "SIT",
+      "ApiVersionDetails": [
+        {
+          "ApiVersionType": "APIM",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "FUNCTION_APP",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "PUBLIC_API",
+          "ApiVersion": "v2/"
+        }
+      ]
+    },
+    {
+      "Environment": "DEV",
+      "ApiVersionDetails": [
+        {
+          "ApiVersionType": "APIM",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "FUNCTION_APP",
+          "ApiVersion": "v2/"
+        },
+        {
+          "ApiVersionType": "PUBLIC_API",
+          "ApiVersion": "v2/"
+        }
+      ]
+    }
+  ]
+}

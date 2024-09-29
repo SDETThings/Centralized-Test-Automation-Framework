@@ -36,7 +36,7 @@ public class AddUserPage extends BaseClass {
     public ContactListPage enterUserDetailsInSignUp(JsonArray completeTestCaseData) {
         boolean isSuccesfull;
         masterDataUtils = new MasterDataUtils();
-        JsonObject pageData = masterDataUtils.accessPageWiseWenMobileData(completeTestCaseData, addUserPageConstant);
+        JsonObject pageData = masterDataUtils.accessPageWiseWebMobileData(completeTestCaseData, addUserPageConstant);
         boolean hasClicked = false;
         driverActions = new DriverActions();
         try {

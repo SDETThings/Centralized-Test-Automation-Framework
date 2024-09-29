@@ -18,8 +18,7 @@ public class landingPage extends BaseClass {
     {
         PageFactory.initElements(getDriver(), this);
     }
-    public String getTitle()
-    {
+    public String getTitle() throws InterruptedException {
         driverActions = new DriverActions();
 
         return driverActions.getTitle(getDriver());

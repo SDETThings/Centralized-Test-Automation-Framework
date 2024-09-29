@@ -4,7 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6650dd5a-78a5-4888-8bbd-050e420cdaae" name="Changes" comment="" />
+    <list default="true" id="6650dd5a-78a5-4888-8bbd-050e420cdaae" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/ReportLogging/APIReportLogging.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/APIReportLogging.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/EnvDataProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/DataProviders/WEBDataProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Utils/TestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Utils/TestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/Certificates/ClientCertificate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/Certificates/ClientCertificate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/RequestTypes/RestUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/APIVersions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/APIVersions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/API/URIConstruction/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/DriverActionables/DriverActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/DriverActionables/DriverActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/PageConstants/PageConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/PageConstants/PageConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/component/WEB/Urls/WebUrls.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/API/PetStoreCompositeFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/API/PetStoreCompositeFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/WEB/ContactListCompositeFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/WEB/ContactListCompositeFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/addUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/addUserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/contactListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/contactListPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/landingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client001/landingPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/AddUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/AddUserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/ContactListPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/ContactListPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/LandingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/LandingPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Step/API/PetStoreTestCaseSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Step/API/PetStoreTestCaseSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Step/WEB/ContactListTestCaseSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Step/WEB/ContactListTestCaseSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Tests/API/PetStoreTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Tests/API/PetStoreTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT001/getBearerToken_RequestPayload.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT001/placePetOrder_RequestPayload.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT002/RequestPayload.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT002/addPets_RequestPayload.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT003/RequestPayload.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientRequestPayloads/CLIENT003/addPets_RequestPayload.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT001/Client001CaseMasterData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT001/Client001CaseMasterData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT002/Client002CaseMasterData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/ClientTestCaseData/CLIENT002/Client002CaseMasterData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/Client001_TestDriver.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/TestCaseInputDriver.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/Client002_TestDriver.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/ClientTestCaseDriverFiles/Client003_TestDriver.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/TestCaseResults/TC0003_20240525154058/TC0003_REPORT_20240525154058.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/TestCaseResults/TC0003_20240525154132/TC0003_REPORT_20240525154132.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/testDataDriver.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testDataDriver.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testng.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,9 +93,9 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;centralRepositoryWorking&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kunal/IdeaProjects/Centralized-Framework/src/test/java/com/qa/Pages/client001&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kunal/IdeaProjects/Centralized-Framework/src/main/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -63,16 +107,19 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\java\com\qa\Pages\client001" />
+      <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\main\resources" />
       <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\resources\ClientRequestPayloads\CLIENT003" />
       <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\resources\ClientRequestPayloads\CLIENT002" />
+      <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\java\com\qa\Pages\client001" />
       <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\resources\ClientRequestPayloads\CLIENT001" />
-      <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\resources\ClientTestCaseData\CLIENT002" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\PASS-SAMPLE-REPORT_files" />
       <recent name="C:\Users\Kunal\IdeaProjects\Centralized-Framework\src\test\resources\ClientTestCaseData\CLIENT001" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.qa.component.WEB.WEBReportLogging" />
+      <recent name="com.qa.DataProviders" />
       <recent name="com.qa.Pages.client002" />
       <recent name="com.qa.Utils" />
     </key>
@@ -123,47 +170,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/API/PetStoreCompositeFunctions.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/qa/Step/API/PetStoreTestCaseSteps.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/API/PetStoreCompositeFunctions.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java</url>
-          <line>50</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="50" />
+          <line>86</line>
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java</url>
-          <line>150</line>
-          <option name="timeStamp" value="52" />
+          <line>1141</line>
+          <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/qa/CompositeFunctions/WEB/ContactListCompositeFunctions.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="61" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/qa/component/WEB/WEBReportLogging/WEBReportLogging.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="126" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

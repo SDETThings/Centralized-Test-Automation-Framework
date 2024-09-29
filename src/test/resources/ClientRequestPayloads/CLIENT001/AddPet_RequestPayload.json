@@ -1,16 +1,16 @@
 {
-  "id": "{{static}}",
+  "id": "",
   "category": {
-    "id": "{{static}}",
+    "id": "",
     "name": "{{static}}"
   },
   "name": "{{static}}",
   "photoUrls": [
-    "{{static}}"
+    "abc@something.com"
   ],
   "tags": [
     {
-      "id": "{{static}}",
+      "id": "",
       "name": "{{static}}"
     }
   ],

@@ -1,0 +1,72 @@
+{
+  "Environments": [
+    {
+      "Environment": "PROD",
+      "BaseUrlDetails": [
+        {
+          "BaseUrlType": "APIM",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "FUNCTION_APP",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "PUBLIC_API",
+          "BaseUrl": "https://petstore.swagger.io/"
+        }
+      ]
+    },
+    {
+      "Environment": "UAT",
+      "BaseUrlDetails": [
+        {
+          "BaseUrlType": "APIM",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "FUNCTION_APP",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "PUBLIC_API",
+          "BaseUrl": "https://petstore.swagger.io/"
+        }
+      ]
+    },
+    {
+      "Environment": "SIT",
+      "BaseUrlDetails": [
+        {
+          "BaseUrlType": "APIM",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "FUNCTION_APP",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "PUBLIC_API",
+          "BaseUrl": "https://petstore.swagger.io/"
+        }
+      ]
+    },
+    {
+      "Environment": "DEV",
+      "BaseUrlDetails": [
+        {
+          "BaseUrlType": "APIM",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "FUNCTION_APP",
+          "BaseUrl": "https://petstore.swagger.io/"
+        },
+        {
+          "BaseUrlType": "PUBLIC_API",
+          "BaseUrl": "https://petstore.swagger.io/"
+        }
+      ]
+    }
+  ]
+}

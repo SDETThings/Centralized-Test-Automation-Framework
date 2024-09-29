@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Centralized test automation framework" parallel="methods" >
-    <parameter name="testConfigFile" value="./src/main/java/com/qa/JsonModellers/TestDataDriver.java"/>
+<suite name="Centralized test automation framework" parallel="methods" thread-count="4" verbose="3">
     <listeners>
         <listener class-name="com.qa.Utils.TestListener"/>
         <listener class-name="com.qa.Utils.ReportListeners"/>
@@ -9,12 +8,6 @@
     <test name="PetStore API application" >
         <classes>
             <class name="com.qa.Tests.API.PetStoreTestCases"/>
-        </classes>
-    </test>
-    <test name="Contact list front end application" >
-        <parameter name="browser" value="chrome"/>
-        <parameter name="url" value="https://thinking-tester-contact-list.herokuapp.com/"/>
-        <classes>
             <class name="com.qa.Tests.WEB.ContactListTestCases"/>
         </classes>
     </test>

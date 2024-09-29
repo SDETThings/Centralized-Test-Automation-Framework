@@ -11,7 +11,7 @@ public class APIVersions extends BaseClass {
     public static final String PETSTORE_QA_VERSION_V3 = "v2/";
     public synchronized String getApiVersion(String client,String env , String baseUrlType,String endpointConstant) {
         String apiVersion = "";
-        if (endpointConstant.contains(Constants.GET_RESTFULL_BOOKER_AUTH_TOKEN)) {
+        if (endpointConstant.contains(Constants.ADD_NEW_PET)) {
             apiVersion = "";
         } else {
             if (env.equalsIgnoreCase("ENV001")) {
