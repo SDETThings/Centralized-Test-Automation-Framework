@@ -51,4 +51,4 @@ jobs:
           MAVEN_TOKEN: ${{ secrets.OWNER_TOKEN }}
 
       - name: Run test cases
-        run: mvn clean compile test --file pom.xml'
+        run: mvn clean compile test --file pom.xml
