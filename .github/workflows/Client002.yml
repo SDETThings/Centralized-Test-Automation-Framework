@@ -56,7 +56,7 @@ jobs:
 
       - name: Add isHeadless value to Config.properties
         run: |
-          echo "isHeadless=true" >> ./Config.properties 
+          echo "isHeadless=true" >> Config.properties 
 
       - name: Install Chrome
         run: |
