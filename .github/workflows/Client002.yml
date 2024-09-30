@@ -52,11 +52,11 @@ jobs:
 
       - name: Delete existing isHeadless property from config.properties
         run: |
-          sed -i '/^isHeadless/d' config.properties
+          sed -i '/^isHeadless/d' ./config.properties
 
       - name: Add isHeadless value to config.properties
         run: |
-          echo "isHeadless=true" >> config.properties 
+          echo "isHeadless=true" >> ./config.properties 
 
       - name: Install Chrome
         run: |
