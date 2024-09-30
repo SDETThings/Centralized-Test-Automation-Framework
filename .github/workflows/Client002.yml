@@ -55,11 +55,11 @@ jobs:
 
       - name: Delete existing isHeadless property from Config.properties
         run: |
-          sed -i '/^isHeadless=/d' Config.properties || true
+          sed -i '/^isHeadless=/d' ./Config.properties || true
 
       - name: Add isHeadless value to Config.properties
         run: |
-          echo "isHeadless=true" >> Config.properties
+          echo "isHeadless=true" >> ./Config.properties
           cat Config.properties  # Verify the addition
 
       - name: Install Chrome
