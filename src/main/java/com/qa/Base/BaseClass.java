@@ -25,6 +25,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -1123,6 +1124,7 @@ String runOn = "Local";
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         getDriver().manage().timeouts().pageLoadTimeout(20,TimeUnit.SECONDS);
+
         getDriver().get(url);
 
         return getDriver().getTitle().equalsIgnoreCase(prop.getProperty("ContactsApplicationLandingPageTitle"));
