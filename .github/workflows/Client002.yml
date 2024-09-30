@@ -75,3 +75,9 @@ jobs:
 
       - name: Run test cases
         run: mvn clean compile test --file pom.xml
+
+      - name: Upload Folder as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-folder-artifact  # Name of the artifact
+          path: ./src/test/resources/TestCaseResults/
