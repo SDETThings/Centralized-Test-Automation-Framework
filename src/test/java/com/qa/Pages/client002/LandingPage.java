@@ -3,6 +3,7 @@ package com.qa.Pages.client002;
 import com.google.gson.JsonObject;
 import com.qa.Base.BaseClass;
 import com.qa.component.WEB.DriverActionables.DriverActions;
+import com.qa.component.WEB.webWaits.WebDriverWaits;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ import java.util.function.Predicate;
 
 public class LandingPage extends BaseClass {
     private static final Logger log = LogManager.getLogger(LandingPage.class);
+    WebDriverWaits webDriverWaits;
     DriverActions driverActions;
     @FindBy(xpath = "//button[@id='signup']")
     WebElement signUpButton;
@@ -47,8 +49,11 @@ public class LandingPage extends BaseClass {
         return new AddUserPage();
     }
     public ContactListPage existingUserSignIn(JsonObject testData){
+
         driverActions = new DriverActions();
         try {
+            webDriverWaits = new WebDriverWaits(getDriver(),3);
+            webDriverWaits.fluentWaitForElement(emailTextBox,3,100);
             driverActions.enterText(getDriver(),emailTextBox,testData.get("email").getAsString());
             driverActions.enterText(getDriver(),passwordTextBox,testData.get("password").getAsString());
             driverActions.clickOnWebElement(getDriver(),submitButton);

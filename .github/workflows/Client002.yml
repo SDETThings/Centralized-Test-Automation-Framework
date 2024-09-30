@@ -101,11 +101,17 @@ jobs:
           wget https://msedgedriver.azureedge.net/$EDGE_VERSION/edgedriver_linux64.zip
           unzip edgedriver_linux64.zip
           sudo mv msedgedriver /usr/local/bin/
-          
+
       - name: Run test cases
         id: test_run
         run: mvn clean compile test --file pom.xml
         continue-on-error: true  # Allow the workflow to continue even if this step fails
+
+      - name: Upload Folder as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-folder-artifact  # Name of the artifact
+          path: ./src/test/resources/TestCaseResults/
 
       # This will mark the job as failed if the test cases failed
       - name: Check Test Results
@@ -114,9 +120,3 @@ jobs:
           echo "Tests failed!"
           exit 1  # Mark the job as failed
           fi
-
-      - name: Upload Folder as Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-folder-artifact  # Name of the artifact
-          path: ./src/test/resources/TestCaseResults/
