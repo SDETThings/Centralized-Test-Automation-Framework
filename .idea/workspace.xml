@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6650dd5a-78a5-4888-8bbd-050e420cdaae" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/Client002.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/Client002.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/applogs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/applogs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/DataProviders/APIDataProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/qa/DataProviders/APIDataProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qa/JsonModellers/TestDataDriver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/AddUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Pages/client002/AddUserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,18 +139,13 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/qa/Base/BaseClass.java</url>
-          <line>1131</line>
+          <line>1133</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/qa/component/WEB/WEBReportLogging/WEBReportLogging.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="125" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/qa/Utils/ReportListeners.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="126" />
+          <url>file://$PROJECT_DIR$/src/test/java/com/qa/Tests/WEB/ContactListTestCases.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

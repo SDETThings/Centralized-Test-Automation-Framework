@@ -1,31 +1,19 @@
-2024-09-29T11:00:23,816 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:00:28,270 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:02:32,574 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:02:32,579 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:10:34,539 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:10:34,958 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:28:09,346 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:28:09,485 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:30:26,684 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:30:27,144 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:33:19,618 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:33:19,623 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:39:19,128 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
-2024-09-29T11:39:22,355 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:39:22,355 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:39:22,356 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:39:22,366 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
+2024-09-30T09:47:33,195 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
+2024-09-30T09:47:39,784 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:47:39,785 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:47:39,785 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:47:39,811 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
 
  MethodType => POST
  URI => https://petstore.swagger.io/v2/pet
  Request Headers => accept=application/json
 Content-Type=application/json
- Request Body => {"id":233,"category":{"id":917,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":150,"name":"small canines"}],"status":"available"}
+ Request Body => {"id":844,"category":{"id":352,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":199,"name":"small canines"}],"status":"available"}
  Status code => 200
  Response Body => {
-    "id": 233,
+    "id": 844,
     "category": {
-        "id": 917,
+        "id": 352,
         "name": "Canines"
     },
     "name": "Buster",
@@ -34,26 +22,28 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 150,
+            "id": 199,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:39:24,562 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:39:24,562 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:39:24,562 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:39:24,565 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
+2024-09-30T09:47:43,228 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
+2024-09-30T09:47:43,244 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
+2024-09-30T09:47:44,367 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:47:44,368 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:47:44,368 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:47:44,376 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
 
  MethodType => GET
- URI => https://petstore.swagger.io/v2/pet/233
+ URI => https://petstore.swagger.io/v2/pet/844
  Request Headers => accept=application/json
 Content-Type=application/json
  Status code => 200
  Response Body => {
-    "id": 233,
+    "id": 844,
     "category": {
-        "id": 917,
+        "id": 352,
         "name": "Canines"
     },
     "name": "Buster",
@@ -62,31 +52,30 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 150,
+            "id": 199,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:39:33,867 [TestNG-test=Contact list front end application-1] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:39:34,112 [TestNG-test=Contact list front end application-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:40:00,819 [TestNG-tests-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
-2024-09-29T11:40:05,617 [TestNG-tests-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:40:06,525 [TestNG-tests-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:40:06,526 [TestNG-tests-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:40:06,526 [TestNG-tests-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:40:06,543 [TestNG-tests-1] INFO  (ApiCallLogging.java:24) - 
+2024-09-30T09:48:41,793 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
+2024-09-30T09:48:47,357 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
+2024-09-30T09:48:47,360 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
+2024-09-30T09:48:47,762 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:48:47,763 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:48:47,763 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:48:47,782 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
 
  MethodType => POST
  URI => https://petstore.swagger.io/v2/pet
  Request Headers => accept=application/json
 Content-Type=application/json
- Request Body => {"id":413,"category":{"id":561,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":247,"name":"small canines"}],"status":"available"}
+ Request Body => {"id":563,"category":{"id":842,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":938,"name":"small canines"}],"status":"available"}
  Status code => 200
  Response Body => {
-    "id": 413,
+    "id": 563,
     "category": {
-        "id": 561,
+        "id": 842,
         "name": "Canines"
     },
     "name": "Buster",
@@ -95,26 +84,26 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 247,
+            "id": 938,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:40:09,076 [TestNG-tests-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:40:09,076 [TestNG-tests-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:40:09,076 [TestNG-tests-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:40:09,080 [TestNG-tests-1] INFO  (ApiCallLogging.java:43) - 
+2024-09-30T09:48:50,915 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:48:50,916 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:48:50,917 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:48:50,930 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
 
  MethodType => GET
- URI => https://petstore.swagger.io/v2/pet/413
+ URI => https://petstore.swagger.io/v2/pet/563
  Request Headers => accept=application/json
 Content-Type=application/json
  Status code => 200
  Response Body => {
-    "id": 413,
+    "id": 563,
     "category": {
-        "id": 561,
+        "id": 842,
         "name": "Canines"
     },
     "name": "Buster",
@@ -123,31 +112,29 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 247,
+            "id": 938,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:40:21,929 [TestNG-tests-2] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:40:56,643 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
-2024-09-29T11:41:01,106 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:41:01,715 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:41:01,835 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:41:01,835 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:41:01,836 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:41:01,856 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
+2024-09-30T09:51:26,684 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
+2024-09-30T09:51:32,518 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
+2024-09-30T09:51:33,255 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:51:33,256 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:51:33,256 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:51:33,295 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
 
  MethodType => POST
  URI => https://petstore.swagger.io/v2/pet
  Request Headers => accept=application/json
 Content-Type=application/json
- Request Body => {"id":216,"category":{"id":955,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":453,"name":"small canines"}],"status":"available"}
+ Request Body => {"id":719,"category":{"id":611,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":192,"name":"small canines"}],"status":"available"}
  Status code => 200
  Response Body => {
-    "id": 216,
+    "id": 719,
     "category": {
-        "id": 955,
+        "id": 611,
         "name": "Canines"
     },
     "name": "Buster",
@@ -156,26 +143,27 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 453,
+            "id": 192,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:41:04,748 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:41:04,749 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:41:04,749 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:41:04,756 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
+2024-09-30T09:51:33,428 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
+2024-09-30T09:51:59,304 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:51:59,305 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:51:59,305 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:51:59,311 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
 
  MethodType => GET
- URI => https://petstore.swagger.io/v2/pet/216
+ URI => https://petstore.swagger.io/v2/pet/719
  Request Headers => accept=application/json
 Content-Type=application/json
  Status code => 200
  Response Body => {
-    "id": 216,
+    "id": 719,
     "category": {
-        "id": 955,
+        "id": 611,
         "name": "Canines"
     },
     "name": "Buster",
@@ -184,30 +172,29 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 453,
+            "id": 192,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:41:25,209 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
-2024-09-29T11:41:30,396 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T11:41:30,508 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
-2024-09-29T11:41:31,259 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:41:31,260 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:41:31,261 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:41:31,306 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
+2024-09-30T09:52:19,693 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
+2024-09-30T09:52:26,497 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:52:26,498 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:52:26,499 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:52:26,505 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
+2024-09-30T09:52:26,544 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
 
  MethodType => POST
  URI => https://petstore.swagger.io/v2/pet
  Request Headers => accept=application/json
 Content-Type=application/json
- Request Body => {"id":497,"category":{"id":250,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":889,"name":"small canines"}],"status":"available"}
+ Request Body => {"id":160,"category":{"id":510,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":949,"name":"small canines"}],"status":"available"}
  Status code => 200
  Response Body => {
-    "id": 497,
+    "id": 160,
     "category": {
-        "id": 250,
+        "id": 510,
         "name": "Canines"
     },
     "name": "Buster",
@@ -216,26 +203,27 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 889,
+            "id": 949,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T11:41:35,186 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T11:41:35,186 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T11:41:35,186 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T11:41:35,191 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
+2024-09-30T09:52:26,845 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED
+2024-09-30T09:52:31,032 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
+2024-09-30T09:52:31,032 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
+2024-09-30T09:52:31,033 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
+2024-09-30T09:52:31,046 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
 
  MethodType => GET
- URI => https://petstore.swagger.io/v2/pet/497
+ URI => https://petstore.swagger.io/v2/pet/160
  Request Headers => accept=application/json
 Content-Type=application/json
  Status code => 200
  Response Body => {
-    "id": 497,
+    "id": 160,
     "category": {
-        "id": 250,
+        "id": 510,
         "name": "Canines"
     },
     "name": "Buster",
@@ -244,69 +232,9 @@ Content-Type=application/json
     ],
     "tags": [
         {
-            "id": 889,
+            "id": 949,
             "name": "small canines"
         }
     ],
     "status": "available"
 }
-2024-09-29T22:54:26,339 [TestNG-test=PetStore API application-1] INFO  (ReportListeners.java:52) - PET0001 : STARTED
-2024-09-29T22:54:36,245 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T22:54:36,245 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T22:54:36,246 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T22:54:36,267 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:24) - 
-
- MethodType => POST
- URI => https://petstore.swagger.io/v2/pet
- Request Headers => accept=application/json
-Content-Type=application/json
- Request Body => {"id":775,"category":{"id":759,"name":"Canines"},"name":"Buster","photoUrls":["abc@something.com"],"tags":[{"id":541,"name":"small canines"}],"status":"available"}
- Status code => 200
- Response Body => {
-    "id": 775,
-    "category": {
-        "id": 759,
-        "name": "Canines"
-    },
-    "name": "Buster",
-    "photoUrls": [
-        "abc@something.com"
-    ],
-    "tags": [
-        {
-            "id": 541,
-            "name": "small canines"
-        }
-    ],
-    "status": "available"
-}
-2024-09-29T22:54:40,600 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:18) - =============================================================================================================================
-2024-09-29T22:54:40,600 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:19) - ==============================================EXECUTION START================================================================
-2024-09-29T22:54:40,601 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:20) - =============================================================================================================================
-2024-09-29T22:54:40,613 [TestNG-test=PetStore API application-1] INFO  (ApiCallLogging.java:43) - 
-
- MethodType => GET
- URI => https://petstore.swagger.io/v2/pet/775
- Request Headers => accept=application/json
-Content-Type=application/json
- Status code => 200
- Response Body => {
-    "id": 775,
-    "category": {
-        "id": 759,
-        "name": "Canines"
-    },
-    "name": "Buster",
-    "photoUrls": [
-        "abc@something.com"
-    ],
-    "tags": [
-        {
-            "id": 541,
-            "name": "small canines"
-        }
-    ],
-    "status": "available"
-}
-2024-09-29T22:54:41,314 [TestNG-test=PetStore API application-3] INFO  (ReportListeners.java:52) - CON0002 : STARTED
-2024-09-29T22:54:41,576 [TestNG-test=PetStore API application-2] INFO  (ReportListeners.java:52) - CON0001 : STARTED

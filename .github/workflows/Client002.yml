@@ -49,7 +49,15 @@ jobs:
         env:
           MAVEN_USER: ${{ secrets.OWNER_USERNAME }}
           MAVEN_TOKEN: ${{ secrets.OWNER_TOKEN }}
-          
+
+      - name: Delete existing isHeadless property from config.properties
+        run: |
+          sed -i '/^isHeadless/d' config.properties
+
+      - name: Add isHeadless value to config.properties
+        run: |
+          echo "isHeadless=true" >> config.properties 
+
       - name: Install Chrome
         run: |
           sudo apt-get update

@@ -47,7 +47,7 @@ public class ContactListTestCases extends ContactListCompositeFunctions {
             DeviceName.set(getTestCaseMetaDataBlock(testCaseId.get()).get("DeviceName").getAsString());
             AppVersion.set(getTestCaseMetaDataBlock(testCaseId.get()).get("AppVersion").getAsString());
             groupName.set(getTestCaseMetaDataBlock(testCaseId.get()).get("groupName").getAsString());
-            setWebDriver(WebDriverManager.getDriverProvider().setUpWebDriver(BrowserName.get()));
+            setWebDriver(WebDriverManager.getDriverProvider().setUpWebDriver(BrowserName.get(),Boolean.parseBoolean(prop.getProperty("isHeadless"))));
             OpenApplication(environment.get());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
