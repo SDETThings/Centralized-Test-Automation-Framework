@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Centralized test automation framework" parallel="methods" thread-count="4" verbose="3">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Centralized test automation framework" parallel="methods" thread-count="4" verbose="3" >
     <listeners>
         <listener class-name="com.qa.Utils.TestListener"/>
         <listener class-name="com.qa.Utils.ReportListeners"/>
     </listeners>
-    <test name="PetStore API application" >
+    <test name="CENTRALIZED FRAMEWORK -TEST RUN SUITE" >
         <classes>
             <class name="com.qa.Tests.API.PetStoreTestCases"/>
             <class name="com.qa.Tests.WEB.ContactListTestCases"/>
