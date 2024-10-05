@@ -89,24 +89,6 @@ jobs:
           tar -xzf geckodriver-v0.33.0-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
 
-      # Install Edge
-      - name: Install Edge
-        run: |
-          curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-          sudo install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/
-          sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list'
-          sudo rm microsoft.gpg
-          sudo apt-get update
-          sudo apt-get install -y microsoft-edge-stable
-
-      - name: Install EdgeDriver
-        run: |
-          EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-          echo "Edge Version: $EDGE_VERSION"
-          wget https://msedgedriver.azureedge.net/$EDGE_VERSION/edgedriver_linux64.zip || echo "Error: Could not download EdgeDriver"
-          unzip edgedriver_linux64.zip
-          sudo mv msedgedriver /usr/local/bin/
-
       - name: Run test cases
         id: test_run
         run: mvn clean compile test --file pom.xml
