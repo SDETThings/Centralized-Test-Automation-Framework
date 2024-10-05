@@ -1,19 +1,18 @@
 package com.qa.Pages.client002;
 
+import WebSynchronization.DriverActionsFactory;
 import com.google.gson.JsonObject;
 import com.qa.Base.BaseClass;
 import com.qa.component.WEB.DriverActionables.DriverActions;
+import com.qa.component.WEB.webWaits.WebDriverWaits;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-
 public class LandingPage extends BaseClass {
     private static final Logger log = LogManager.getLogger(LandingPage.class);
+    WebDriverWaits webDriverWaits;
     DriverActions driverActions;
     @FindBy(xpath = "//button[@id='signup']")
     WebElement signUpButton;
@@ -47,11 +46,12 @@ public class LandingPage extends BaseClass {
         return new AddUserPage();
     }
     public ContactListPage existingUserSignIn(JsonObject testData){
-        driverActions = new DriverActions();
+
+
         try {
-            driverActions.enterText(getDriver(),emailTextBox,testData.get("email").getAsString());
-            driverActions.enterText(getDriver(),passwordTextBox,testData.get("password").getAsString());
-            driverActions.clickOnWebElement(getDriver(),submitButton);
+            DriverActionsFactory.getInstance().enterText(getDriver(),emailTextBox,testData.get("email").getAsString(),timeOutSeconds,pollingInterval);
+            DriverActionsFactory.getInstance().enterText(getDriver(),passwordTextBox,testData.get("password").getAsString(),timeOutSeconds,pollingInterval);
+            DriverActionsFactory.getInstance().clickOnWebElement(getDriver(),submitButton,timeOutSeconds,pollingInterval);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

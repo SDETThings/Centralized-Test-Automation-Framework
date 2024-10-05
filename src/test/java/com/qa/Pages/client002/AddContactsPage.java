@@ -1,5 +1,6 @@
 package com.qa.Pages.client002;
 
+import WebSynchronization.DriverActionsFactory;
 import com.google.gson.JsonObject;
 import com.qa.Base.BaseClass;
 import com.qa.component.WEB.DriverActionables.DriverActions;
@@ -28,9 +29,9 @@ public class AddContactsPage extends BaseClass {
         driverActions = new DriverActions();
         webReportLogging = new WEBReportLogging();
         try {
-            driverActions.enterText(getDriver(),firstNameTextField,testData.get("firstName").getAsString());
-            driverActions.enterText(getDriver(),lastNameTextField,testData.get("lastName").getAsString());
-            driverActions.clickOnWebElement(getDriver(),submitButton);
+            DriverActionsFactory.getInstance().enterText(getDriver(),firstNameTextField,testData.get("firstName").getAsString(),timeOutSeconds,pollingInterval);
+            DriverActionsFactory.getInstance().enterText(getDriver(),lastNameTextField,testData.get("lastName").getAsString(),timeOutSeconds,pollingInterval);
+            DriverActionsFactory.getInstance().clickOnWebElement(getDriver(),submitButton,timeOutSeconds,pollingInterval);
             logWebExecutionStepIntoExtentReport("New contact created with | FIRSTNAME | : "
                     +testData.get("firstName").getAsString() + " | LASTNAME | "+ testData.get("lastName").getAsString());
         } catch (Exception e) {

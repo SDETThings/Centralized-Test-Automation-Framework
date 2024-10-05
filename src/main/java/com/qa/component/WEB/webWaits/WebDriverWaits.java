@@ -5,7 +5,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class WebDriverWaits extends BaseClass {
@@ -19,17 +18,29 @@ public class WebDriverWaits extends BaseClass {
     }
 
     // Explicit wait for element to be visible
-    public WebElement waitForElementToBeVisible(By locator) {
-        return explicitWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public WebElement waitForElementToBeVisible(WebElement element) {
+        return explicitWait.until(driver -> {
+            if (element.isDisplayed()) {
+                return element;
+            } else {
+                return null;
+            }
+        });
     }
 
     // Explicit wait for element to be clickable
-    public WebElement waitForElementToBeClickable(By locator) {
-        return explicitWait.until(ExpectedConditions.elementToBeClickable(locator));
+    public WebElement waitForElementToBeClickable(WebElement element) {
+        return explicitWait.until(driver -> {
+            if (element.isEnabled() && element.isDisplayed()) {
+                return element;
+            } else {
+                return null;
+            }
+        });
     }
 
     // Fluent wait method (configurable polling duration and ignoring exceptions)
-    public WebElement fluentWaitForElement(final By locator, int timeoutInSeconds, int pollingInMillis) {
+    public WebElement fluentWaitForElement(final WebElement element, int timeoutInSeconds, int pollingInMillis) {
         Wait<WebDriver> fluentWait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(timeoutInSeconds))
                 .pollingEvery(Duration.ofMillis(pollingInMillis))
@@ -38,7 +49,16 @@ public class WebDriverWaits extends BaseClass {
 
         return fluentWait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver driver) {
-                return driver.findElement(locator);
+                try {
+                    // Check if the element is displayed
+                    if (element.isDisplayed()) {
+                        return element;
+                    }
+                } catch (StaleElementReferenceException e) {
+                    // If the element is stale, return null so it can retry
+                    return null;
+                }
+                return null; // Return null to keep waiting
             }
         });
     }

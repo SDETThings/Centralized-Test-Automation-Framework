@@ -1,7 +1,6 @@
 package com.qa.component.WEB.DriverActionables;
 
 import com.qa.Base.BaseClass;
-import com.qa.Utils.ReportListeners;
 import com.qa.component.WEB.webWaits.WebDriverWaits;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -646,9 +644,5 @@ public class DriverActions extends BaseClass {
         //+ "_" + dateName + ".png";
 
         return destination;
-    }
-    public static String getCurrentTime() {
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd-hhmmss").format(new Date());
-        return currentDate;
     }
 }

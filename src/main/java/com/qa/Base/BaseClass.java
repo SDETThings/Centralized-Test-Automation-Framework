@@ -70,6 +70,8 @@ public class BaseClass {
     public ThreadLocal<IOSDriver> LocalIOSDriver= new ThreadLocal<>();
     JsonOperations jsonOperations;
     public ThreadLocal<Integer> TestIterationCount= new ThreadLocal<>();
+    public static int timeOutSeconds = 10;
+    public static int pollingInterval = 1;
     public synchronized String generateRandomName(int nameLength) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'

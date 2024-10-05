@@ -1,5 +1,6 @@
 package com.qa.Pages.client002;
 
+import WebSynchronization.DriverActionsFactory;
 import com.qa.Base.BaseClass;
 import com.qa.component.WEB.DriverActionables.DriverActions;
 import org.openqa.selenium.WebElement;
@@ -23,7 +24,7 @@ public class ContactListPage extends BaseClass {
     {
         driverActions = new DriverActions();
         try {
-            driverActions.clickOnWebElement(getDriver(),addNewContactButton);
+            DriverActionsFactory.getInstance().clickOnWebElement(getDriver(),addNewContactButton,timeOutSeconds,pollingInterval);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
