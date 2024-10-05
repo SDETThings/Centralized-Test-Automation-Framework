@@ -102,7 +102,8 @@ jobs:
       - name: Install EdgeDriver
         run: |
           EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-          wget https://msedgedriver.azureedge.net/$EDGE_VERSION/edgedriver_linux64.zip
+          echo "Edge Version: $EDGE_VERSION"
+          wget https://msedgedriver.azureedge.net/$EDGE_VERSION/edgedriver_linux64.zip || echo "Error: Could not download EdgeDriver"
           unzip edgedriver_linux64.zip
           sudo mv msedgedriver /usr/local/bin/
 
